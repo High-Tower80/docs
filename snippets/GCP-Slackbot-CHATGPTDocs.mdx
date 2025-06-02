@@ -1,25 +1,25 @@
 ## Slack-App-Vms
 
-### <Tooltip tip="">Start and stop nohup</Tooltip>
+<Steps>
+  <Step title="Start and stop nohup">
+    
 
-- STOP THE BOT
-- check for PID `ps aux | grep "main-yes.py"`
-- more detail `ps -ef | grep python`
-- START THE BOT
-- 
-- from mainbot  dir
-- 
+    - check for PID `ps aux | grep "main-yes.py"`
+    - more detail `ps -ef | grep python`
+    - from mainbot  dir
+  </Step>
+  <Step title="kill [PID]">
+    
+  </Step>
+  <Step title="nohup python main-yes.py > bot.log 2>&1 &">
+    
+  </Step>
+</Steps>
 
-<Info>
-  .env is in top level
-</Info>
+Stop and Start
 
-<RequestExample>
-
-```bash filename
 myenv /mainbot/myenv/bin/activate
-```
 
-</RequestExample>
-
-`nohup python main-yes.py > bot.log 2>&1 &`
+<Check>
+  .env is on main level
+</Check>
