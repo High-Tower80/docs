@@ -1,0 +1,50 @@
+---
+title: "IT Triage for Phishing Reports"
+sidebarTitle: "Phishing triage (IT)"
+description: "IT triage steps for phishing reports, including Kmicro SOC escalation."
+icon: "user-shield"
+noindex: true
+---
+
+<Warning>
+  IT-only playbook. Staff should use the [phishing alert guide](/how-to/phishing-alert-guide) and never click the mail themselves.
+</Warning>
+
+When IT receives a phishing report, triage it and escalate to Kmicro SOC.
+
+## 1. Acknowledge
+
+Tell the reporter you have it. If there is no ticket yet, forward the message to [help@intertrend.atlassian.net](mailto:help@intertrend.atlassian.net).
+
+## 2. Basic checks
+
+- Read headers: sender IP, domain, spoofing, mismatched domains.
+- **Do not click links or open attachments.** Use a sandbox or VirusTotal.
+- Look for a wider campaign.
+
+## 3. Org impact
+
+Check gateway logs for the same message. Watch for odd logins or access on related accounts.
+
+## 4. Escalate to SOC
+
+Send to [**soc@kmicro.com**](mailto:soc@kmicro.com). Forward the original as an attachment. Include:
+
+- Sender address and domain
+- Suspicious links or attachments
+- Whether others got the same mail
+- Any IOCs
+
+## 5. Contain while you wait
+
+- Block the sender or domain in email security
+- Warn staff if it is widespread (subject line, do-not-open)
+- Watch logs for suspicious logins or transfers
+
+## 6. Follow SOC, then close
+
+Apply their guidance (blocks, password resets, deeper IR). Log IOCs. Close the ticket and tell the reporter it is handled.
+
+See also [Incident response](/sops/incident-response).
+
+Source: [Company Wiki — IT Triage for Phishing Reports](https://wiki.intertrendhub.com).
