@@ -1,0 +1,58 @@
+---
+title: "ChatGPT in Slack"
+sidebarTitle: "ChatGPT in Slack"
+description: "Chat, DALL·E images, PDF Q&A, and /wiki search in Slack."
+icon: "robot"
+noindex: true
+---
+
+<Info>
+  Current model: **gpt-5.4** (updated 3/1/26). The bot is a custom Python Slack app on Google Cloud, not Slack’s built-in AI.
+</Info>
+
+Intertrend’s Slack ChatGPT bot works in a **DM** or in any channel. It remembers your last few messages for **15 minutes**.
+
+## Start a chat
+
+1. Search Slack for `@ChatGPT` and open **Messages**. Star it so it stays in your sidebar.
+2. In a channel, mention `@ChatGPT` on the same line as your prompt.
+3. Type like a normal Slack message and send.
+
+Examples:
+
+- “How can I clear my cache in Chrome?”
+- “Write a short blog post on the benefits of remote work.”
+- Give it a persona, or follow up so it keeps context (“Plan a trip to Paris” then “What should I see there?”).
+
+## Generate images (DALL·E 3)
+
+Prefix the prompt with `image:`
+
+```text
+image: kitty finds its mommy at sunset
+image: spiderman in the art style of Jim Lee
+```
+
+Images usually take about 8 seconds.
+
+## Chat with a PDF
+
+1. Upload a **text-based** PDF (contracts, invoices, policies work; scanned image PDFs often fail).
+2. Wait for the scan.
+3. Ask questions. The bot keeps that PDF in context for **about 30 minutes**, or until you upload another.
+
+## Search the Company Wiki
+
+```text
+/wiki wifi
+```
+
+or type `wiki: pto` in a DM or channel. Results use public wiki links, not raw Notion URLs.
+
+## Good habits
+
+- Be specific. Iterate if the first answer is off.
+- Follow the company [AI Policy](https://wiki.intertrendhub.com) for client work and confidential files.
+- For bot problems, ping `@Assist` or open a [help ticket](/how-to/submit-a-help-ticket).
+
+Sources: [ChatGPT in Slack](https://wiki.intertrendhub.com/ChatGPT-in-Slack-9ed4b9a4cec647ffa68fef7656b71d3b) and the public Slackbot README.

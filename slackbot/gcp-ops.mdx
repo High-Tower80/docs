@@ -1,0 +1,43 @@
+---
+title: "Slackbot on GCP"
+sidebarTitle: "GCP ops"
+description: "Start, stop, and locate the Slackbot process on GCP."
+icon: "cloud"
+noindex: true
+---
+
+How the Slack ChatGPT bot is run on Google Cloud. For staff usage, see [ChatGPT in Slack](/slackbot/chatgpt-in-slack).
+
+<Warning>
+  Do not commit `.env` or tokens. The env file lives at the project root, not inside a nested folder.
+</Warning>
+
+## Process checks
+
+From the bot host:
+
+```bash
+ps aux | grep "main-yes.py"
+ps -ef | grep python
+```
+
+Activate the venv from the bot directory:
+
+```bash
+source myenv/bin/activate
+```
+
+## Stop and start
+
+```bash
+kill [PID]
+nohup python main-yes.py > bot.log 2>&1 &
+```
+
+<Check>
+  `.env` is on the main project level.
+</Check>
+
+If the process will not stay up, open an [IT ticket](/how-to/submit-a-help-ticket) rather than sharing secrets in Slack.
+
+Source: High-Tower80/docs `GCP-Slackbot-Docs`.
