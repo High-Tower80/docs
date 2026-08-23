@@ -26,7 +26,8 @@
               "how-to/submit-a-help-ticket",
               "how-to/phishing-alert-guide",
               "how-to/software-toolkit",
-              "how-to/hub-tips"
+              "how-to/hub-tips",
+              "how-to/drive-external-sharing"
             ]
           },
           {
@@ -55,7 +56,9 @@
             "group": "Facilities SOPs",
             "icon": "building",
             "pages": [
-              "sops/building-access"
+              "sops/building-access",
+              "sops/visitor-access",
+              "sops/emergency-evacuation"
             ]
           }
         ]
