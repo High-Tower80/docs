@@ -1,0 +1,53 @@
+---
+title: "Cybersecurity Incident Response Plan"
+sidebarTitle: "Incident response"
+description: "IRT roles, 72-hour phases, backups, and breach notice rules."
+icon: "triangle-exclamation"
+noindex: true
+---
+
+<Note>
+  Intertrend IT Standards. Version 02, February 2024. Owner: IT Security. Reviewed annually with COO.
+</Note>
+
+This is the **approved plan**. For the short IT triage checklist, use [Incident response SOP](/sops/incident-response) and [Phishing triage](/sops/phishing-triage).
+
+## Purpose
+
+Detect, contain, and recover from unauthorized access, malware, phishing, DDoS, and insider issues. Align with CCPA, GDPR, and NIST CSF.
+
+## Who is on the IRT
+
+| Role | Who | Does |
+| --- | --- | --- |
+| Incident Response Manager | IT Security Lead | Runs the response |
+| Data Protection Officer | COO | CCPA / GDPR |
+| IT Security Analysts | IT | Forensics and containment |
+| Legal | Counsel | Notice language |
+| Communications | Managing Director | Internal and public messaging |
+| Cloud and infrastructure | IT | GCP restore |
+| Vendors | Backblaze, Google Cloud Security, and others as needed | Forensics and mitigation |
+
+## Phases
+
+**0–1 hour — detect**<br />SIEM / EDR alert → confirm impact → isolate endpoints, block bad IPs, revoke creds → open a ticket with a case ID.
+
+**1–6 hours — investigate**<br />GCP Security and Microsoft Defender. Find the path in. Check whether PII, financials, or credentials leaked.
+
+**6–12 hours — contain**<br />Patch, restore from Backblaze or GCP, MFA reset, phishing warning if needed.
+
+**12–24 hours — notify**<br />Leadership and affected staff. If **500\+ customer records**, CCPA / California AG. Customers via email, SMS, or a secure portal. Law enforcement if it looks criminal.
+
+**24–48 hours — recover**<br />Bring services back. Watch for leftovers. Tighten controls.
+
+**48–72 hours — review**<br />Post-mortem, training, playbook update.
+
+## Cloud backup posture
+
+No dedicated DR site. **GCP \+ Backblaze B2**. Endpoints: Jamf Protect and Defender. DNS filtering is on the FortiGate (Cisco Umbrella appears in the 2024 plan as a capability; live gear is listed under [Remote access](/policies/remote-access)).
+
+Log everything in the SIEM. Annual tabletop. Records stay in encrypted cloud storage.
+
+Staff: if you think you clicked something bad, do not wait for the 72-hour clock. [Report phishing](/how-to/phishing-alert-guide) or `/assist` now.
+
+Source: Drive _IT\_CybersecurityIncidentResponsePlan_. Copy only.

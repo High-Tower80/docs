@@ -32,6 +32,19 @@
             ]
           },
           {
+            "group": "IT Policies",
+            "icon": "scale-balanced",
+            "pages": [
+              "policies/endpoint-security",
+              "policies/overview",
+              "policies/remote-access",
+              "policies/network-security",
+              "policies/backup-recovery",
+              "policies/incident-response",
+              "policies/generative-ai"
+            ]
+          },
+          {
             "group": "Slackbot",
             "icon": "slack",
             "pages": [
