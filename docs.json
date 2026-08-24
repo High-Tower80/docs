@@ -36,6 +36,7 @@
             "icon": "scale-balanced",
             "pages": [
               "policies/endpoint-security",
+              "policies/identity-entra",
               "policies/overview",
               "policies/remote-access",
               "policies/network-security",
