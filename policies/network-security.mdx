@@ -1,0 +1,56 @@
+---
+title: "Network Security Policy"
+sidebarTitle: "Network security"
+description: "Perimeter, DLP, wireless, and vendor access — staff digest of the IT standard."
+icon: "network-wired"
+noindex: true
+---
+
+<Note>
+  Intertrend IT Standards. Cover dated January 2025. COO approves updates. This page is the working digest; the long ISO/PCI annex stays in Drive.
+</Note>
+
+## Purpose
+
+Keep the Intertrend network reliable and keep data from walking out the side door.
+
+## What you must not do
+
+- Sniff, scan, or attack the network
+- Attach unapproved gear (including random Wi-Fi access points or modems)
+- Share your login
+- Send confidential or cardholder data in unencrypted email
+- Use FTP, Telnet, or other clear-text admin protocols
+
+## How access works
+
+- Internet-bound traffic goes through filtering (URL categories, email attachment scan, SPF/DKIM/DMARC)
+- Remote access is documented, logged, and MFA-backed. See [Remote access](/policies/remote-access)
+- VPN uses AES-256 and IKEv2/IPSec, no split tunnel, IT-approved devices only
+- Guest and BYOD stay on isolated VLANs with internet only
+- Vendor tools and customer-network links need the IT Manager plus the data owner
+
+## Data loss prevention
+
+| Class | Meaning |
+| --- | --- |
+| Public | Fine to share widely |
+| Internal | Staff only |
+| Confidential | Named people / need to know |
+| Restricted | Highest care; encryption and IT controls |
+
+DLP watches email, Drive, and endpoints. USB is restricted. Alerts go to security.
+
+## Wireless and guests
+
+WPA3 is the minimum (WPA2 only with extra controls). Staff use managed access points. Guests use guest Wi-Fi. Do not put visitors on the staff LAN. SSID and passwords stay in the wiki.
+
+Personal laptops need manager email plus IT before any staff LAN. Internet-only use goes on the guest network. VPN is not for non-standard personal machines.
+
+## Incidents
+
+Treat odd network behavior as an incident. See [Incident response](/policies/incident-response) and the [IT SOP](/sops/incident-response).
+
+Violations can be a disciplinary matter. Exceptions go through the IT Exceptions process, not Slack.
+
+Source: Drive _IT\_NetworkSecurityPolicy_. Copy only.

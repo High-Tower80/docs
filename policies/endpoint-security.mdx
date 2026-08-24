@@ -1,0 +1,65 @@
+---
+title: "Endpoint Security Policy"
+sidebarTitle: "Endpoint security"
+description: "Jamf Protect, FileVault, and rules for company Macs and iOS."
+icon: "laptop"
+noindex: true
+---
+
+<Note>
+  Intertrend IT Standards. Version 1.0, February 2024. Owner: IT Security. Approved by COO / IT.
+</Note>
+
+## Purpose
+
+Secure every company-managed Apple endpoint against malware, unauthorized apps, and data loss.
+
+## Scope
+
+- Company Macs (laptops and desktops)
+- Company iPhone and iPad
+- Any future company-supported Apple device that joins Intertrend network or cloud services
+
+## Standard
+
+**Jamf Protect** is the endpoint platform. **Jamf Pro** is required MDM. Devices not enrolled do not get company resources.
+
+Do not disable, uninstall, or tamper with Jamf Protect. Keep OS and Jamf policies current.
+
+## Requirements
+
+**Protection**
+
+- Jamf Protect monitors for malware, ransomware, and suspicious behavior
+- Only apps from the Intertrend IT App Store
+- FileVault on, firewall on
+- USB and external drives restricted to limit exfiltration
+- Compliance checked before access (zero trust)
+
+**Network**
+
+- Remote access uses Intertrend VPN (Google Workspace identity)
+- Office Wi-Fi is for managed, compliant devices only
+- Jamf Protect DNS filtering blocks known-bad sites
+
+**Mobile**
+
+- No jailbroken or rooted devices
+- Face ID or Touch ID required for corporate access
+- Report lost or stolen devices to IT immediately — remote wipe is enabled
+
+**If something looks wrong**
+
+Jamf can quarantine a device and isolate it from the network. Events go to Intertrend’s SIEM. Report odd behavior via [Submit a help ticket](/how-to/submit-a-help-ticket).
+
+## Your job
+
+Stay enrolled. Do not install random software. Follow password, phishing, and acceptable-use rules.
+
+Non-compliance can mean revoked access, HR review, or the device being turned off.
+
+IT audits quarterly. This policy is reviewed annually.
+
+Related: [Remote access](/policies/remote-access), [Incident response](/policies/incident-response), [Hardware request](/sops/hardware-request).
+
+Source: Drive _IT\_EndpointSecurityPolicy_. Copy only.

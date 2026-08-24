@@ -1,0 +1,48 @@
+---
+title: "Backup and Recovery Policy"
+sidebarTitle: "Backup and recovery"
+description: "Backblaze for Google Workspace, MSP backups, and restore targets."
+icon: "cloud-arrow-up"
+noindex: true
+---
+
+<Note>
+  Intertrend IT Standards. Version 1.1, February 2024. Owner: IT Security.
+</Note>
+
+## Purpose
+
+Protect Intertrend data so a delete, outage, or ransomware event is recoverable.
+
+## What is backed up
+
+- Google Workspace: Gmail, Drive, Docs, Sheets, Slides, Calendar, Contacts, Shared Drives
+- Internal servers and financial apps (via the MSP)
+- Cloud instances, configs, and logs that matter to operations
+
+## Cadence
+
+| Data | How often | Keep |
+| --- | --- | --- |
+| Google Workspace to Backblaze B2 | Daily, plus incremental every 4 hours for critical files | Drive versions 90 days; Gmail/Calendar/Contacts 1 year |
+| Financial apps and internal servers | Daily by MSP; monthly full encrypted offsite | Annual archive for compliance |
+
+All backups encrypted in transit and at rest (AES-256). MFA required to reach backup consoles. Unauthorized delete is blocked where the platform allows it.
+
+## Restore targets
+
+- **RPO:** no more than 4 hours of data loss
+- **RTO:** critical data back within 1 hour
+- IT runs quarterly restore drills
+
+**How a restore goes:** assess what is missing → Backblaze for Workspace or MSP for servers/finance → restore to original or alternate location → check integrity → tell affected users → review logs.
+
+Priority in a major event: executive mail, active Drive projects, financial systems, customer contracts and compliance files.
+
+Need a file back? [Submit a help ticket](/how-to/submit-a-help-ticket). Do not ask in a public channel with client names.
+
+Reviewed annually. Access to backup admin is IT and MSP only.
+
+Related: [Incident response](/policies/incident-response).
+
+Source: Drive _NEW_ (Backup and Recovery Policy). Copy only.

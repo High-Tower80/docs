@@ -1,0 +1,61 @@
+---
+title: "Remote Access Policy"
+sidebarTitle: "Remote access"
+description: "VPN, MFA, session rules, and approved network equipment."
+icon: "wifi"
+noindex: true
+---
+
+<Note>
+  Intertrend IT Standards. 2024 update. Approved by COO. Deviations go through the IT Exceptions process.
+</Note>
+
+## Purpose
+
+Let people work off-network without opening the company to drive-by access.
+
+## Scope
+
+Everyone and every vendor who reaches Intertrend systems from outside the office network.
+
+## Rules that apply to you
+
+- **MFA** is required for remote access
+- Traffic is encrypted (TLS 1.3 or IPSec / NIST-approved)
+- Idle sessions drop (about 10 minutes on this standard; VPN procedures also cite 15 — treat idle as short)
+- Least privilege. No dual/split tunnel: all traffic goes through the VPN for inspection
+- Only Intertrend-issued or IT-approved devices
+- Do not run scanners, sniffers, or denial-of-service tools on the network
+- USB and other removable media are restricted and logged
+- Sensitive mail leaving the company must be encrypted
+
+Need VPN? Ask IT (purpose, how long, which systems) with your manager’s OK. See [Submit a help ticket](/how-to/submit-a-help-ticket).
+
+Vendors get temporary, watched access only.
+
+## Wireless
+
+WPA3 is the minimum. Guest devices stay on guest Wi-Fi — not the staff LAN. Passwords stay in the wiki, not here.
+
+## Approved infrastructure (current)
+
+| Role | What we run | Who | RTO |
+| --- | --- | --- | --- |
+| Firewall | FortiGate 60F | IT Security | 4 hours |
+| Switching | Meraki MS210-48LP | IT Security | 4 hours |
+| Internet | Frontier gigabit fiber | IT Security | 4 hours |
+| Wi-Fi | UniFi U7 Pro | IT Security | 4 hours |
+| Remote access | FortiGate VPN client | IT Security | Immediate |
+| Cloud files | Google Drive | IT Security | 1 hour |
+| Endpoints | Jamf Protect (Mac), Microsoft Defender (PC) | IT Security | Continuous |
+| DNS filter | FortiGate 60F | IT Security | Immediate |
+
+Changes to this list need IT Security approval.
+
+## Data handling
+
+Classify data as Public, Internal, Confidential, or Restricted. DLP watches movement. No unencrypted confidential email outbound.
+
+Related: [Network security](/policies/network-security), [Endpoint security](/policies/endpoint-security).
+
+Source: Drive _IT\_Remote Access_. Copy only. Full ISO/PCI appendix stays in Drive.
