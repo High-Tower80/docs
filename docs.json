@@ -35,9 +35,9 @@
             "group": "IT Policies",
             "icon": "scale-balanced",
             "pages": [
+              "policies/overview",
               "policies/endpoint-security",
               "policies/identity-entra",
-              "policies/overview",
               "policies/remote-access",
               "policies/network-security",
               "policies/backup-recovery",

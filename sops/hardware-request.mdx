@@ -6,23 +6,33 @@ icon: "laptop"
 noindex: true
 ---
 
-Standardize how people request, receive, and track hardware (MacBooks, monitors, peripherals, replacements).
+How people request, receive, and track hardware. Standard and retirement rules: [Endpoint security](/policies/endpoint-security).
 
-**Tools:** Assist (Slack → Jira), asset inventory, Jamf.
+**Tools:** Assist (Slack → Jira), asset inventory, Jamf Pro.
+
+## Standard issue
+
+- **Laptop:** Apple Silicon MacBook Air or Pro (current M-series). FileVault escrowed to Jamf before it leaves IT.
+- **Not standard:** Intel Macs, personal machines as a daily driver, unmanaged Windows.
+- Monitors, docks, and desks may need manager or Finance approval.
+
+If someone asks to keep a 2015–2019 Intel box "because it still works," that is a retirement conversation, not a preference.
 
 ## Procedure
 
-1. **Request** — Staff opens `/assist` in Slack. Include hardware type, why it is needed, and a shipping address if they are remote.
-2. **Approval** — Second monitors, standing desks, and similar extras may need manager or Finance approval.
-3. **Fulfillment** — IT checks inventory, assigns the device, installs Jamf / required software, and updates the asset tracker (user, serial, date issued).
-4. **Delivery** — Office pickup, or ship with tracking for remote staff.
+1. **Request** — `/assist`. Hardware type, why, ship-to if remote.
+2. **Approval** — extras go through manager / Finance.
+3. **Build** — IT assigns the asset, enrolls in Jamf (user-initiated today; ABM / ADE is the target, not live as of March 2026), installs required profiles, updates the tracker (user, serial, date).
+4. **Delivery** — office pickup or tracked ship.
+
+Do not write enrollment secrets into the ticket, Slack, or this site.
 
 ## Tips
 
-- Update inventory whenever a device is reassigned.
-- Use `/assist` for every request so the trail stays auditable.
-- Confirm the power adapter is included.
+- Update inventory on every reassignment. The sheet going stale is how we lose a Mac.
+- Use `/assist` for every request so there is an audit trail.
+- Confirm charger and, for remotes, a return label plan if they leave.
 
 **Contact:** [help@intertrend.atlassian.net](mailto:help@intertrend.atlassian.net) or `/assist`.
 
-Source: unpublished Notion SOP _Hardware Request & Allocation_.
+Source: Notion SOP _Hardware Request & Allocation_, updated August 2026 against the live fleet and Jamf health check.

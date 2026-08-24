@@ -7,55 +7,63 @@ noindex: true
 ---
 
 <Note>
-  Intertrend IT Standards. 2024 update. Approved by COO. Deviations go through the IT Exceptions process.
+  Intertrend IT standard, August 2026. Replaces the 2024 Drive remote-access copy. Exceptions go through the IT Exceptions process.
 </Note>
 
 ## Purpose
 
-Let people work off-network without opening the company to drive-by access.
+People work off the office LAN. That does not mean the company is open to whatever device happens to have a password.
+
+Identity is the first control. See [Identity and Entra](/policies/identity-entra). This page is the network side: VPN, gear, and session rules.
 
 ## Scope
 
-Everyone and every vendor who reaches Intertrend systems from outside the office network.
+Everyone and every vendor who reaches Intertrend systems from outside the Long Beach or Plano staff LAN.
 
 ## Rules that apply to you
 
-- **MFA** is required for remote access
-- Traffic is encrypted (TLS 1.3 or IPSec / NIST-approved)
-- Idle sessions drop (about 10 minutes on this standard; VPN procedures also cite 15 — treat idle as short)
-- Least privilege. No dual/split tunnel: all traffic goes through the VPN for inspection
-- Only Intertrend-issued or IT-approved devices
-- Do not run scanners, sniffers, or denial-of-service tools on the network
-- USB and other removable media are restricted and logged
-- Sensitive mail leaving the company must be encrypted
+- **MFA** on the identity, then the VPN. SMS is not an acceptable factor. Authenticator with number matching or a passkey.
+- Traffic is encrypted (TLS 1.3 or IPSec).
+- **Idle timeout is 15 minutes.** The old docs disagreed (10 vs 15). 15 is the rule. Do not leave a VPN session up overnight.
+- Least privilege. No split tunnel. Inspection happens on the company path.
+- Intertrend-issued or IT-approved devices only. Personal laptops do not get staff VPN.
+- Do not run scanners, sniffers, or denial-of-service tools.
+- USB and other removable media are restricted.
+- Confidential mail leaving the company is encrypted.
 
-Need VPN? Ask IT (purpose, how long, which systems) with your manager’s OK. See [Submit a help ticket](/how-to/submit-a-help-ticket).
+Need VPN? Ticket with purpose, duration, and systems, plus your manager. [Submit a help ticket](/how-to/submit-a-help-ticket).
 
-Vendors get temporary, watched access only.
+Vendors get time-bounded, watched access. No standing vendor VPN because it is convenient.
+
+## Remote support
+
+Prefer **Jamf Remote Assist** on enrolled Macs (user has to accept screen share). ConnectWise / ScreenConnect stays for machines that are not enrolled. Unenrolled remote support is a smell — enroll the device or do not put company data on it.
 
 ## Wireless
 
-WPA3 is the minimum. Guest devices stay on guest Wi-Fi — not the staff LAN. Passwords stay in the wiki, not here.
+WPA3 is the minimum. Guests stay on guest Wi-Fi. Passwords stay in the wiki, not here.
 
 ## Approved infrastructure (current)
 
 | Role | What we run | Who | RTO |
 | --- | --- | --- | --- |
-| Firewall | FortiGate 60F | IT Security | 4 hours |
-| Switching | Meraki MS210-48LP | IT Security | 4 hours |
-| Internet | Frontier gigabit fiber | IT Security | 4 hours |
-| Wi-Fi | UniFi U7 Pro | IT Security | 4 hours |
-| Remote access | FortiGate VPN client | IT Security | Immediate |
-| Cloud files | Google Drive | IT Security | 1 hour |
-| Endpoints | Jamf Protect (Mac), Microsoft Defender (PC) | IT Security | Continuous |
-| DNS filter | FortiGate 60F | IT Security | Immediate |
+| Firewall / DNS filter | FortiGate 60F | IT | 4 hours |
+| Switching | Meraki MS210-48LP | IT | 4 hours |
+| Internet | Frontier gigabit fiber | IT | 4 hours |
+| Wi-Fi | UniFi U7 Pro | IT | 4 hours |
+| Remote access | FortiGate VPN client | IT | Immediate |
+| Cloud files | Google Drive | IT | 1 hour |
+| Endpoints | Jamf Protect (Mac), Microsoft Defender where Windows remains | IT | Continuous |
+| SOC / vuln | KMicro managed detection, scanning, and IR retainers | KMicro \+ IT | Per incident |
 
-Changes to this list need IT Security approval.
+A single FortiGate 60F is not high availability. If that box dies, remote access and DNS filtering die with it. That is an accepted risk until we buy a pair or a cloud fallback. Do not write "resilient" on a client questionnaire unless you can point at the second path.
+
+Changes to this list need IT approval.
 
 ## Data handling
 
-Classify data as Public, Internal, Confidential, or Restricted. DLP watches movement. No unencrypted confidential email outbound.
+Public / Internal / Confidential / Restricted. DLP watches movement. No unencrypted confidential email outbound.
 
-Related: [Network security](/policies/network-security), [Endpoint security](/policies/endpoint-security).
+Related: [Network security](/policies/network-security), [Endpoint security](/policies/endpoint-security), [Identity and Entra](/policies/identity-entra).
 
-Source: Drive _IT\_Remote Access_. Copy only. Full ISO/PCI appendix stays in Drive.
+Source: Drive _IT\_Remote Access_, updated against live gear and the 2026 SOC relationship. Full ISO/PCI annex stays in Drive.

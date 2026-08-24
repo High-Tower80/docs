@@ -7,47 +7,78 @@ noindex: true
 ---
 
 <Note>
-  Intertrend IT Standards. Version 02, February 2024. Owner: IT Security. Reviewed annually with COO.
+  Intertrend IT standard, August 2026. Replaces CIRP v02 (February 2024) as the operating plan. Owner: IT. Reviewed with COO after incidents, not only on the calendar.
 </Note>
 
-This is the **approved plan**. For the short IT triage checklist, use [Incident response SOP](/sops/incident-response) and [Phishing triage](/sops/phishing-triage).
+This is the **approved plan**. Short IT checklist: [Incident response SOP](/sops/incident-response) and [Phishing triage](/sops/phishing-triage).
 
 ## Purpose
 
-Detect, contain, and recover from unauthorized access, malware, phishing, DDoS, and insider issues. Align with CCPA, GDPR, and NIST CSF.
+Detect, contain, and recover from account takeover, malware, phishing, denial of service, and insider issues. Align with CCPA, other privacy law that actually applies, and NIST CSF.
+
+The 2024 plan talked about SIEM, Umbrella, and a clean 72-hour clock. The incident we actually had was a mailbox that mailed the outside world for hours after two months of quiet abuse. Write the plan for that, not for a textbook ransomware cartoon.
 
 ## Who is on the IRT
 
 | Role | Who | Does |
 | --- | --- | --- |
-| Incident Response Manager | IT Security Lead | Runs the response |
-| Data Protection Officer | COO | CCPA / GDPR |
-| IT Security Analysts | IT | Forensics and containment |
+| Incident Response Manager | IT (Tate; Sam as backup) | Runs the response |
+| Data Protection Officer | COO | Privacy notice calls |
+| IT operators | IT | Containment, Jamf, Google admin, Entra |
+| SOC / IR partner | KMicro | Forensics, mailbox / Entra investigation, vuln context |
 | Legal | Counsel | Notice language |
 | Communications | Managing Director | Internal and public messaging |
-| Cloud and infrastructure | IT | GCP restore |
-| Vendors | Backblaze, Google Cloud Security, and others as needed | Forensics and mitigation |
+| Cloud | IT | GCP and Workspace restore |
+| Backup vendor | Backblaze (Workspace) | Restore |
 
-## Phases
+If you are staff and you think you clicked something, you are not on the IRT. You report. Do not wait for the clock below. [Report phishing](/how-to/phishing-alert-guide) or `/assist` now.
 
-**0–1 hour — detect**<br />SIEM / EDR alert → confirm impact → isolate endpoints, block bad IPs, revoke creds → open a ticket with a case ID.
+## What we do first (account takeover)
 
-**1–6 hours — investigate**<br />GCP Security and Microsoft Defender. Find the path in. Check whether PII, financials, or credentials leaked.
+This is the pattern we already lived:
 
-**6–12 hours — contain**<br />Patch, restore from Backblaze or GCP, MFA reset, phishing warning if needed.
+1. Disable the account or revoke sessions and refresh tokens.
+2. Reset credentials. Remove and re-register MFA. Kill SMS if it is still there.
+3. Search for inbox rules, forwarding, delegates, Send-as, and OAuth / enterprise apps.
+4. Pull Entra sign-in logs and, if licensed, Identity Protection and Graph activity logs.
+5. Check the endpoint (Jamf Protect / Defender). Isolate if needed.
+6. Block known-bad domains and IPs.
+7. Decide who outside the company must be told. Unauthorized mail to third parties is an external incident, not "just IT."
+8. Write the timeline in a private Drive folder. Names and recipient lists stay off this site and off public Slack.
 
-**12–24 hours — notify**<br />Leadership and affected staff. If **500\+ customer records**, CCPA / California AG. Customers via email, SMS, or a secure portal. Law enforcement if it looks criminal.
+## Phases (clock starts when IT or KMicro confirms, not when someone "has a bad feeling")
 
-**24–48 hours — recover**<br />Bring services back. Watch for leftovers. Tighten controls.
+**0–1 hour — detect and isolate.** Confirm impact. Isolate endpoints. Revoke creds. Open a ticket with a case ID. Call KMicro if identity or mail is involved.
 
-**48–72 hours — review**<br />Post-mortem, training, playbook update.
+**1–6 hours — investigate.** Entra, Microsoft 365, Google admin audit, Jamf. Find the path in. Check PII, financials, credentials, mailbox rules, OAuth.
+
+**6–12 hours — contain.** Patch or reimage. Restore if needed. MFA reset at scale if the factor is burned. Staff warning if phishing is still landing.
+
+**12–24 hours — notify.** Leadership and affected staff. If **500\+ consumer records**, California AG / CCPA analysis with Legal. Customers by a channel Legal approves. Law enforcement if it looks criminal.
+
+**24–48 hours — recover.** Bring services back. Watch for leftovers.
+
+**48–72 hours — review.** Post-mortem with gaps, not compliments. Update this page if the plan was wrong.
+
+## Logging we must have
+
+June 2026: tenant on Entra ID Free, no Identity Protection, no Graph activity logging. KMicro could not reconstruct Graph API actions or prove initial access. Containment still worked. Attribution did not.
+
+Required after that incident:
+
+- Entra P2 or equivalent, Identity Protection on
+- Graph activity logging on and retained
+- SOC able to see identity alerts
+- Jamf Protect telemetry to the SOC (discussed March 2026, **not confirmed live**)
+
+If those are still off, say so in the post-mortem. Do not write "full visibility."
 
 ## Cloud backup posture
 
-No dedicated DR site. **GCP \+ Backblaze B2**. Endpoints: Jamf Protect and Defender. DNS filtering is on the FortiGate (Cisco Umbrella appears in the 2024 plan as a capability; live gear is listed under [Remote access](/policies/remote-access)).
+No dedicated DR site. **Workspace \+ Backblaze B2** and **KMicro server backups**. Endpoints: Jamf Protect; Defender where Windows remains. DNS filtering is the FortiGate. Cisco Umbrella appears in the 2024 PDF as a capability; do not list it unless it is still paid and on.
 
-Log everything in the SIEM. Annual tabletop. Records stay in encrypted cloud storage.
+Annual tabletop is required. Last tabletop date is **not on this site**.
 
-Staff: if you think you clicked something bad, do not wait for the 72-hour clock. [Report phishing](/how-to/phishing-alert-guide) or `/assist` now.
+Related: [Identity and Entra](/policies/identity-entra), [Backup and recovery](/policies/backup-recovery).
 
-Source: Drive _IT\_CybersecurityIncidentResponsePlan_. Copy only.
+Sources: Drive CIRP v02; June 2026 executive incident summary (do not republish names or recipient lists); KMicro SOC retainer.

@@ -7,36 +7,55 @@ noindex: true
 ---
 
 <Note>
-  Copies of the 2024–2025 IT Standards. Drive remains the signed original. This site is the searchable staff copy. Org members only.
+  These pages are the operating standard, not a cleaned-up reprint of the 2024 Drive pack. Drive still holds signed originals, insurance filings, and client packets. If a control is not live, the page says so.
 </Note>
 
-These are the company-wide policies IT reviews about once a year. They are not client addenda.
+IT reviews this set at least once a year, and after a real incident. Last material inputs: Jamf Pro health check (March 2026), M365 mailbox compromise (June 2026), KMicro MSP / SOC invoices (still active August 2026).
 
 ## Current set
 
-| Policy | What it covers | Review |
-| --- | --- | --- |
-| [Endpoint security](/policies/endpoint-security) | Jamf Protect, FileVault, company Macs and iOS | Annual |
-| [Remote access](/policies/remote-access) | VPN, MFA, approved network gear | Annual |
-| [Network security](/policies/network-security) | Perimeter, DLP, wireless, vendor access | Annual |
-| [Backup and recovery](/policies/backup-recovery) | Backblaze, MSP backups, RPO/RTO | Annual |
-| [Incident response](/policies/incident-response) | IRT roles, 72-hour phases, CCPA notice | Annual |
-| [Generative AI](/policies/generative-ai) | 2023 formal standard; staff rules also in [AI policy](/how-to/ai-policy) | Annual |
+| Policy | What it actually governs |
+| --- | --- |
+| [Identity and Entra](/policies/identity-entra) | MFA, Conditional Access, privileged accounts. The control that failed in June 2026 |
+| [Endpoint security](/policies/endpoint-security) | Jamf Pro / Protect, FileVault, Apple Silicon standard, Intel retirement |
+| [Remote access](/policies/remote-access) | VPN, approved gear, who may connect |
+| [Network security](/policies/network-security) | Perimeter, email authentication, wireless, vendors |
+| [Backup and recovery](/policies/backup-recovery) | Backblaze \+ KMicro server backups, RPO/RTO, restore proof |
+| [Incident response](/policies/incident-response) | IRT, KMicro, phases, notice. Lessons from June 2026 |
+| [Generative AI](/policies/generative-ai) | Formal gen-AI rule. Day-to-day list: [AI policy](/how-to/ai-policy) |
 
-Day-to-day steps (tickets, phishing, offboarding) live under How-to and IT SOPs. Use those when you need to _do_ something. Use these pages when you need the **approved rule**.
+How-to and SOPs are for doing the work. These pages are the approved rule.
+
+## How to read status
+
+- **Required** means the control must exist. Missing = gap, not a suggestion.
+- **Current state** is what we can document from Drive, Jamf, or incident write-ups. It is allowed to be ugly.
+- **Open gaps** are the work. Do not delete a gap because it is embarrassing.
+
+## Open gaps that cut across policies
+
+1. Entra SKU and live Conditional Access set — **unconfirmed** after the June 2026 finding that the tenant was on Entra ID Free.
+2. SMS / voice MFA still not confirmed dead tenant-wide.
+3. Apple Business Manager / ADE not in use. Wipe still means manual re-enrollment.
+4. Jamf hygiene from March 2026 (unused admin accounts, enrollment account still Administrator, Graph SMTP failing, no email alerts).
+5. No dated restore-test evidence on this site. RTO of 1 hour is a claim until we can point at a drill.
+6. Jamf Protect telemetry is not confirmed in the SOC (Defender / Sentinel).
+7. CIS Level 1 benchmark not configured in Jamf.
+8. Intel Macs and older macOS (Ventura and below) still on the floor.
 
 ## Left in Drive on purpose
 
-| File | Why it stays in Drive |
+| File | Why |
 | --- | --- |
 | Logins – IT Glue | Credentials |
 | Slackbot ChatGPT Logs | Operational logs |
-| 2026 Chubb E&O application | Insurance / legal filing |
-| Business Plus pitch and Vault/DLP upgrade note | Internal proposal, not a staff policy |
-| iT\_GlobalInfoSecPolicy.pdf (2018) | Superseded by the 2024 set |
-| Scratch docs (`NEW` title variants, `ccc`, `Copy of Next`) | Drafts |
-| Email DLP Moderation.docx | Implementation notes, not the signed standard |
+| 2026 Chubb E&O application | Insurance / legal |
+| Business Plus / Vault / DLP pitch | Proposal, not a signed standard |
+| iT\_GlobalInfoSecPolicy.pdf (2018) | Superseded |
+| Email DLP Moderation.docx | Implementation notes |
+| June 2026 incident packet | Names, recipient lists, forensics |
+| Jamf enrollment runbook | Contains enrollment secrets. Do not paste them here |
 
 Source folder: [Security Docs Updated](https://drive.google.com/drive/folders/1ZhDLc9tJALjvQ-vVasKhV2QPJgOkJs0p).
 
-**Next formal review:** with IT and COO, same cadence as the Drive originals (dated February 2024 / January 2025 covers).
+**Next formal review:** IT \+ COO, or immediately after the next identity or endpoint incident. Do not wait for February because the old covers said February.

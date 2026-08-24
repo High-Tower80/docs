@@ -6,23 +6,25 @@ icon: "triangle-exclamation"
 noindex: true
 ---
 
-Respond to phishing, data leaks, and outages. Everyone can report; IT and Security own the response.
+Respond to phishing, mailbox takeover, data leaks, and outages. Everyone can report. IT owns the first hour. KMicro is the SOC / IR partner for identity and mail.
 
-**Tools:** Google Workspace, Slack Assist, admin audit logs, Jamf.
+The approved plan: [Incident response](/policies/incident-response). Staff reporting: [Phishing alert guide](/how-to/phishing-alert-guide). IT playbook: [Phishing triage](/sops/phishing-triage).
+
+**Tools:** Entra / Microsoft 365, Google Workspace, Slack Assist, Jamf Protect, admin audit logs, KMicro.
 
 ## Procedure
 
-1. **Detect and report** — `/assist` or [help@intertrend.atlassian.net](mailto:help@intertrend.atlassian.net). Escalate critical issues immediately.
-2. **Triage** — Severity Low / Medium / High / Critical. Isolate affected devices or accounts.
-3. **Respond** — Revoke Google, Slack, and SaaS access as needed. Scan or reimage devices. Notify impacted people.
-4. **Document** — Internal report with timeline, systems, and actions. Store it securely in Drive.
-5. **Review** — Postmortem. Update SOPs, tooling, or training.
-
-Staff-facing reporting steps: [Phishing alert guide](/how-to/phishing-alert-guide). IT playbook: [Phishing triage](/sops/phishing-triage).
+1. **Detect and report** — `/assist` or [help@intertrend.atlassian.net](mailto:help@intertrend.atlassian.net). Escalate immediately if mail is sending itself or MFA prompts appear unprompted.
+2. **Triage** — Low / Medium / High / Critical. Isolate devices. For mailbox or Entra: revoke sessions, kill inbox rules and forwarding, strip MFA, check OAuth apps. Do not "reset the password and hope."
+3. **Escalate** — Identity or unauthorized outbound mail → KMicro the same day. Do not wait to write a perfect summary.
+4. **Respond** — Revoke Google, Slack, SaaS as needed. Scan or reimage. Notify people who were impersonated or mailed.
+5. **Document** — Private Drive folder. Timeline, systems, actions. No client names in public Slack.
+6. **Review** — Postmortem with gaps. Update the policy if the plan was wrong.
 
 ## Tips
 
 - Report phishing even when you are unsure.
 - Escalate early. Keep chat and audit logs.
+- If Entra logging is still thin, say that in the write-up. Do not invent visibility.
 
-Source: unpublished Notion SOP _Incident Response Plan_.
+Source: Notion SOP _Incident Response Plan_, hardened August 2026.

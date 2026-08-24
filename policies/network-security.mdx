@@ -7,28 +7,44 @@ noindex: true
 ---
 
 <Note>
-  Intertrend IT Standards. Cover dated January 2025. COO approves updates. This page is the working digest; the long ISO/PCI annex stays in Drive.
+  Intertrend IT standard, August 2026. Digest of the January 2025 Drive standard plus what June 2026 actually taught us. The long ISO/PCI annex stays in Drive.
 </Note>
 
 ## Purpose
 
-Keep the Intertrend network reliable and keep data from walking out the side door.
+Keep the office network from being the easy door, and keep mail from being the easy door. Mail already was.
 
 ## What you must not do
 
 - Sniff, scan, or attack the network
-- Attach unapproved gear (including random Wi-Fi access points or modems)
+- Attach unapproved gear (including a random access point or "just a travel router")
 - Share your login
-- Send confidential or cardholder data in unencrypted email
+- Send confidential or cardholder data in clear email
 - Use FTP, Telnet, or other clear-text admin protocols
 
 ## How access works
 
-- Internet-bound traffic goes through filtering (URL categories, email attachment scan, SPF/DKIM/DMARC)
-- Remote access is documented, logged, and MFA-backed. See [Remote access](/policies/remote-access)
-- VPN uses AES-256 and IKEv2/IPSec, no split tunnel, IT-approved devices only
-- Guest and BYOD stay on isolated VLANs with internet only
-- Vendor tools and customer-network links need the IT Manager plus the data owner
+- Internet-bound traffic goes through the FortiGate (URL categories, attachment scan).
+- Remote access is documented, logged, and MFA-backed. See [Remote access](/policies/remote-access) and [Identity and Entra](/policies/identity-entra).
+- VPN: AES-256, IKEv2/IPSec, no split tunnel, IT-approved devices only.
+- Guest and BYOD stay on isolated VLANs with internet only.
+- Vendor tools and customer-network links need IT plus the data owner.
+
+## Email authentication (this is not optional)
+
+June 2026 was a mailbox compromise that mailed ~297 outsiders from a real Intertrend account. Perimeter filtering does not catch that.
+
+| Control | Required |
+| --- | --- |
+| SPF | Published for every sending domain |
+| DKIM | On |
+| DMARC | **p=reject** (or quarantine with a dated plan to reject). Monitoring-only is not a control |
+| External banners | On for mail from outside |
+| Forwarding / inbox rules | IT reviews after incidents and on offboarding |
+
+As of June 2026, DMARC was moved from monitoring **toward** enforcement. **Reject-on-all-domains is not confirmed.** Until it is, say "in progress" on questionnaires, not "enforced."
+
+KMicro runs external / web application testing and vulnerability management on a retainer. Treat their findings as tickets, not PDFs that die in Drive.
 
 ## Data loss prevention
 
@@ -37,20 +53,20 @@ Keep the Intertrend network reliable and keep data from walking out the side doo
 | Public | Fine to share widely |
 | Internal | Staff only |
 | Confidential | Named people / need to know |
-| Restricted | Highest care; encryption and IT controls |
+| Restricted | Encryption and IT controls |
 
-DLP watches email, Drive, and endpoints. USB is restricted. Alerts go to security.
+DLP watches email, Drive, and endpoints where it is actually turned on. USB is restricted. Do not claim Vault / DLP coverage that only exists in a Business Plus pitch deck.
 
 ## Wireless and guests
 
-WPA3 is the minimum (WPA2 only with extra controls). Staff use managed access points. Guests use guest Wi-Fi. Do not put visitors on the staff LAN. SSID and passwords stay in the wiki.
+WPA3 minimum (WPA2 only with extra controls). Staff use managed APs. Guests use guest Wi-Fi. Do not put visitors on the staff LAN. SSID and passwords stay in the wiki.
 
-Personal laptops need manager email plus IT before any staff LAN. Internet-only use goes on the guest network. VPN is not for non-standard personal machines.
+Personal laptops: manager plus IT before any staff LAN. Internet-only goes on guest. VPN is not for non-standard personal machines.
 
 ## Incidents
 
-Treat odd network behavior as an incident. See [Incident response](/policies/incident-response) and the [IT SOP](/sops/incident-response).
+Odd network behavior is an incident. See [Incident response](/policies/incident-response) and the [IT SOP](/sops/incident-response).
 
-Violations can be a disciplinary matter. Exceptions go through the IT Exceptions process, not Slack.
+Violations can be a disciplinary matter. Exceptions go through IT Exceptions, not Slack.
 
-Source: Drive _IT\_NetworkSecurityPolicy_. Copy only.
+Source: Drive _IT\_NetworkSecurityPolicy_; June 2026 incident summary; KMicro monitoring / pentest retainers (August 2026).
