@@ -41,7 +41,7 @@ This is the pattern we already lived:
 2. Reset credentials. Remove and re-register MFA. Kill SMS if it is still there.
 3. Search for inbox rules, forwarding, delegates, Send-as, and OAuth / enterprise apps.
 4. Pull Entra sign-in logs and, if licensed, Identity Protection and Graph activity logs.
-5. Check the endpoint (Jamf Protect / Defender). Isolate if needed.
+5. Check the endpoint in Jamf Protect. Isolate if needed.
 6. Block known-bad domains and IPs.
 7. Decide who outside the company must be told. Unauthorized mail to third parties is an external incident, not "just IT."
 8. Write the timeline in a private Drive folder. Names and recipient lists stay off this site and off public Slack.
@@ -75,7 +75,7 @@ If those are still off, say so in the post-mortem. Do not write "full visibility
 
 ## Cloud backup posture
 
-No dedicated DR site. **Workspace \+ Backblaze B2** and **KMicro server backups**. Endpoints: Jamf Protect; Defender where Windows remains. DNS filtering is the FortiGate. Cisco Umbrella appears in the 2024 PDF as a capability; do not list it unless it is still paid and on.
+No dedicated DR site. **Workspace \+ Backblaze B2** and **KMicro server backups**. Endpoints: Jamf Protect only. DNS filtering is the FortiGate. Cisco Umbrella appears in the 2024 PDF as a capability; do not list it unless it is still paid and on.
 
 Annual tabletop is required. Last tabletop date is **not on this site**.
 
