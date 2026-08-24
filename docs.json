@@ -20,6 +20,11 @@
             ]
           },
           {
+            "group": "Needed",
+            "icon": "hourglass-half",
+            "pages": []
+          },
+          {
             "group": "How-to",
             "icon": "book-open",
             "pages": [
