@@ -22,7 +22,10 @@
           {
             "group": "Needed",
             "icon": "hourglass-half",
-            "pages": []
+            "pages": [
+              "needed/conditional-access",
+              "needed/board"
+            ]
           },
           {
             "group": "How-to",
