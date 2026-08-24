@@ -1,0 +1,76 @@
+---
+title: "Jamf at Intertrend"
+sidebarTitle: "Why Jamf is an island"
+description: "Why Jamf feels like an island, what we already pay for, and how Cursor gets a key."
+icon: "apple"
+noindex: true
+---
+
+<Note>
+  IT-only. This is not a staff how-to. Enrollment passwords, API secrets, and FileVault personal keys stay in the password manager. Never paste them here.
+</Note>
+
+Jamf is not an island because the product is closed. It is an island because we never gave anything else a key. Slack, Notion, Mintlify, KMicro, and Cursor all stop at a browser tab. That is why it feels like wasted potential: Protect is doing the job, and none of the rest of the stack can see it.
+
+Staff-facing rule: [Endpoint security](/policies/endpoint-security).
+
+## What we run
+
+| Piece | URL / note |
+| --- | --- |
+| Jamf Pro | `https://intertrend.jamfcloud.com` |
+| Jamf Protect | Same tenant family. Tamper prevention on (March 2026) |
+| Enrollment today | User-initiated. Manual. ABM / ADE not live |
+| Identity lookup | Entra ID as Cloud Identity Provider |
+| Admin login | Still Jamf ID, not Entra SSO |
+| EDR | **Jamf Protect only.** No Microsoft Defender for Endpoint |
+
+Two people run this: Tate and Sam. That is the bus factor. These pages exist so a third person, or a future-you at 11pm, is not guessing.
+
+## Why Cursor never saw it
+
+This Cloud Agent session has Slack, Drive, Notion, Mintlify, GitHub. It does **not** have Jamf. Zapier has no Jamf app. There is no first-party "live inventory" MCP from Jamf.
+
+Jamf ships an official MCP at `https://developer.jamf.com/mcp`. That server searches **Jamf developer docs and API specs**. It cannot list Intertrend Macs, read Protect alerts, or tell you who is off FileVault.
+
+A live tenant connection is a **separate** thing: an API Role \+ API Client in Jamf Pro, then a local MCP (community [JamfMCP](https://github.com/liquidz00/jamfmcp), or a thin wrapper we write) pointed at `intertrend.jamfcloud.com`. That is how a new Cursor agent actually works the fleet.
+
+Setup: [Connect Cursor to Jamf](/jamf/connect-cursor).
+
+## What "dial it in" means here
+
+Not more policies. Close the loop so Jamf is a system other tools can query, and so the unused product we already pay for is on.
+
+**Already paid, underused (March 2026 health check)**
+
+- Apple Business Manager \+ ADE (wipe should re-enroll itself)
+- Blueprints / DDM (two exist, not deployed)
+- CIS Level 1 benchmark (available, not configured)
+- VPP (token dead since 2018)
+- Protect telemetry into KMicro
+- Nudge (configured in the engagement; confirm it is still scoped)
+- Jamf Remote Assist for enrolled Macs
+- Entra SSO for Jamf _admin_ login
+
+**Hygiene that still may be open**
+
+- Unused Jamf accounts (IT Glue, Jira, API reader, Bob Jones)
+- Enrollment account still Administrator
+- Graph SMTP failing (no cert-expiry mail)
+- APNs reminder for **5 March 2027**
+
+The punch-list with owners: [Jamf operations](/jamf/operations).
+
+## What a connected agent is for
+
+Once Cursor has a **read-only** API client:
+
+- "Which Macs are off FileVault or not checking in?"
+- "Who is still on Ventura?"
+- "What is scoped to the Wi-Fi profile?"
+- "Draft the next health-check delta against March 2026"
+- "Open a ticket list for Protect stale records"
+
+Write access comes later, if ever. An agent that can create policies without you in the loop is how we get a surprise config. Read first.
+
+Do not put the API client secret in Slack, Drive, or this site. Cursor MCP settings or 1Password only.

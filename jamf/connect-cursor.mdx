@@ -1,0 +1,82 @@
+---
+title: "Connect Cursor to Jamf"
+sidebarTitle: "Connect Cursor"
+description: "Docs MCP vs live tenant MCP. Create a read-only API client. Do not paste the secret here."
+icon: "plug"
+noindex: true
+---
+
+<Note>
+  You create the API client in Jamf. Put the secret in Cursor settings or 1Password. Do not paste Client Secret into Slack, Mintlify, or this chat.
+</Note>
+
+Two different "Jamf MCPs." People mix them up. One is a brochure. The other is your tenant.
+
+## 1. Official Jamf MCP (docs only)
+
+Jamf hosts `https://developer.jamf.com/mcp`. Add it in Cursor → Settings → Tools & MCP, or in `~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "jamf-docs": {
+      "url": "https://developer.jamf.com/mcp"
+    }
+  }
+}
+```
+
+Use this when you want API examples, privilege names, or current Jamf Pro API shapes. It cannot see Intertrend devices. Safe to add on any machine. No tenant secret.
+
+Source: [Jamf developer MCP](https://developer.jamf.com/developer-guide/docs/mcp).
+
+## 2. Live tenant MCP (the one you actually want)
+
+This is what a new Cursor agent needs to "point at Jamf" for inventory, health, policies, and Protect-adjacent questions.
+
+There is no first-party live-tenant MCP. The practical options:
+
+| Option | What it is | When |
+| --- | --- | --- |
+| [JamfMCP](https://github.com/liquidz00/jamfmcp) (`liquidz00/jamfmcp`) | Community FastMCP server. Inventory, computer health, policies, profiles, scripts, packages, org objects, SOFA CVE feed. Cursor setup via `jamfmcp-cli -p cursor` | Fastest path. Alpha. Read the repo before you give it write-shaped privileges |
+| Thin wrapper we write | Small MCP over the Jamf Pro API, Intertrend-only tools (check-in, FileVault, smart groups, Protect stale list) | If JamfMCP is too broad or you want the tool list locked |
+| Scripts only | `curl` \+ API client in a private repo | Fine for one-off. Not an agent loop |
+
+Zapier has **no** Jamf app. Do not wait for Zapier.
+
+### Create the API client (Tate does this in Jamf)
+
+Jamf Pro 10.49\+ : **Settings → System → API roles and clients**.
+
+1. **API Role** named `Cursor read` (or similar).
+2. Privileges: every **Read** privilege you want the agent to have. Start narrow: computers, smart groups, policies, configuration profiles, buildings. Do **not** add Create / Update / Delete. Do **not** add **View Disk Encryption Recovery Key** unless you like FileVault keys in an agent transcript.
+3. **API Client** named `Cursor JamfMCP`.
+4. Assign only that role. Enable the client. Set a short access-token lifetime (900–3600 seconds is enough).
+5. Generate the client secret **once**. Store it in 1Password. If you add or remove a role later, rotate the secret.
+
+This client cannot log into the Jamf UI. That is the point. Do not reuse the enrollment admin account or a human password for API access. The March 2026 check already dinged unused human-style API accounts.
+
+Official notes: [API Roles and Clients](https://learn.jamf.com/bundle/jamf-pro-documentation-current/page/API_Roles_and_Clients.html), [client credentials](https://developer.jamf.com/jamf-pro/docs/client-credentials).
+
+### Point Cursor at it
+
+On **your** Mac (not this Cloud Agent):
+
+1. Install [uv](https://github.com/astral-sh/uv) and Python 3.13\+ if JamfMCP needs them.
+2. Follow current [JamfMCP Cursor setup](https://jamfmcp.readthedocs.io/en/latest/user-guide/cli-setup.html): `jamfmcp-cli -p cursor` and give it `https://intertrend.jamfcloud.com`, Client ID, Client Secret.
+3. Confirm in Cursor → Settings → Tools & MCP that the server is connected.
+4. Start a **new** agent. Ask: "List computers that have not checked in for 14 days" and "FileVault status counts." If it answers from the tenant, you are done.
+
+Cloud Agents only see MCPs that exist in **this** environment. A local Cursor MCP on your laptop does not automatically appear here. For a Cloud Agent to use Jamf, the same server has to be installed in the Cloud Agent environment, or we host the MCP somewhere Intertrend-controlled and add it there. That is a second slice. Do not do it until the local read-only client works.
+
+### Rules for any Jamf-connected agent
+
+- Read-only until we write a change playbook.
+- No FileVault personal recovery keys in tool output.
+- No enrollment passwords in prompts.
+- Writes (new policy, scope change, wipe) need you to confirm the exact payload, same as any other write tool.
+- If the agent cannot see Protect alerts, that is a Protect API / telemetry problem, not a Pro inventory problem. We still want Protect logs in KMicro separately.
+
+## When you are ready
+
+Reply that the read-only client exists (not the secret). Then we either finish local JamfMCP on your machine, or stand up a locked-down Intertrend MCP and attach a dedicated agent. I will not ask you to paste the secret here.

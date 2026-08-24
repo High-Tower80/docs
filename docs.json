@@ -46,6 +46,15 @@
             ]
           },
           {
+            "group": "Jamf (IT)",
+            "icon": "apple",
+            "pages": [
+              "jamf/overview",
+              "jamf/connect-cursor",
+              "jamf/operations"
+            ]
+          },
+          {
             "group": "Slackbot",
             "icon": "slack",
             "pages": [

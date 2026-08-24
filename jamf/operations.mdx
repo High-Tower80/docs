@@ -1,0 +1,78 @@
+---
+title: "Jamf operations"
+sidebarTitle: "Operations"
+description: "APNs calendar, enrollment target, Protect, and the paid-but-idle punch-list."
+icon: "list-check"
+noindex: true
+---
+
+<Note>
+  Operating checklist for Tate and Sam. Dates are from the 5 March 2026 Jamf Pro health check unless marked later. Confirm or close each line; do not silently delete a gap.
+</Note>
+
+Policy: [Endpoint security](/policies/endpoint-security). Connector: [Connect Cursor](/jamf/connect-cursor).
+
+## Calendar
+
+| When | What |
+| --- | --- |
+| 30–45 days before **5 March 2027** | Renew MDM Push (APNs) with the **same** Apple ID recorded in Jamf. Wrong Apple ID = re-enroll the fleet |
+| 21 December 2026 | Jamf Pro activation code renewal (health check) |
+| Quarterly | Inventory vs HR roster. Stale Protect records. Unused admin accounts |
+| After every wipe / new hire | Enrollment completed, FileVault escrowed, Protect checking in |
+
+## Enrollment (today vs target)
+
+**Today:** user-initiated at the Jamf enroll URL. Manual. PreStage exists and is idle. ADE token expired. ABM not in use.
+
+**Target:** Apple Business Manager \+ ADE so a wipe lands back in Jamf without a shared enrollment password. Start with meeting-room iPads and every new Mac this refresh cycle. Adding an already-owned Mac to ABM usually means erase first. Plan it; do not surprise people.
+
+The Drive enrollment runbook still has a **shared password**. Rotate it. Do not copy it onto this site, into Slack, or into an agent chat.
+
+## Protect
+
+- Deployed. Tamper prevention enabled March 2026.
+- Stale device records in Protect do not auto-delete when a computer leaves Pro. Clean them on a schedule.
+- Telemetry to KMicro: discussed, **not confirmed live**. Until it is, the SOC is blind to macOS EDR unless someone is in the Protect console.
+- This is the only EDR. There is no Defender fallback.
+
+## Remote support
+
+Jamf Remote Assist for enrolled Macs (user accepts screen share). ConnectWise / ScreenConnect only for machines that are not enrolled. Unenrolled support is a smell.
+
+## Unused potential (paid, idle)
+
+| Capability | March 2026 state | Do this |
+| --- | --- | --- |
+| ABM \+ ADE | Not in use | Start this refresh. Meeting-room iPads first |
+| VPP | Token expired 2018 | New token if iPads need silent app install |
+| Blueprints / DDM | Two exist, not deployed | Move simple settings off classic profiles |
+| CIS Level 1 | Available, not configured | Turn on as the written benchmark for client questionnaires |
+| Nudge | Configured in the engagement | Confirm scope and that people still see it |
+| Entra SSO for Jamf admin | Jamf ID only | Low urgency, still a hole |
+| Graph SMTP | Test failing | Fix or we miss the next APNs expiry the same way |
+| Email notifications | Off until SMTP works | Cert expiry, enrollment failure |
+| Protect → SOC | Talked about | On or explicitly accepted as a gap |
+| API client for Cursor | Did not exist as a documented control | [Connect Cursor](/jamf/connect-cursor) |
+
+## Hygiene
+
+- Remove or disable unused Jamf accounts called out in March: IT Glue, Jira, API reader, Bob Jones.
+- Enrollment account: **Enrollment Only**, not Administrator.
+- Jamf Pro password policy: more than "6-month max age." Match [Passwords and MFA](/sops/password-mfa).
+- Kill Catalina-era policies and unused Restricted Software entries.
+- Split ScreenConnect into deploy-once vs Self Service reinstall.
+- Disable "Include home directory sizes" unless you actually report on it.
+- Audit scripts. Most were test leftovers.
+
+## Agent-ready questions (once the read client exists)
+
+Use these as the first prompts so we know the pipe works:
+
+1. Computers with last check-in older than 14 days.
+2. FileVault counts: enabled / deferred / unknown.
+3. macOS version histogram. Flag Ventura and older.
+4. Policies and profiles scoped to All Computers that we forgot about.
+5. Delta vs this page: which March 2026 gaps are already closed.
+
+If those five answers come back from the tenant, Jamf is no longer an island. Then we talk writes.
