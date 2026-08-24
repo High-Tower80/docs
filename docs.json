@@ -23,8 +23,11 @@
             "group": "Needed",
             "icon": "hourglass-half",
             "pages": [
+              "needed/board",
               "needed/conditional-access",
-              "needed/board"
+              "needed/restore-log",
+              "needed/privileged-accounts",
+              "needed/exceptions"
             ]
           },
           {
