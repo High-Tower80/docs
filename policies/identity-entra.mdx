@@ -1,0 +1,77 @@
+---
+title: "Identity and Access"
+sidebarTitle: "Identity and Entra"
+description: "Entra ID, MFA, Conditional Access, and privileged accounts. The control that failed in June 2026."
+icon: "id-card"
+noindex: true
+---
+
+<Note>
+  Intertrend IT standard, August 2026. This is not a reprint of the 2024 Drive pack. Drive still holds signed originals and client packets. This page is the operating rule.
+</Note>
+
+## Purpose
+
+Stop account takeover from becoming a company-wide incident. Identity is the first control. VPN, Jamf, and the firewall do not save you if MFA is SMS and Entra cannot show what the attacker did.
+
+## Why this page exists
+
+In June 2026 a Microsoft 365 mailbox was used to send unauthorized mail to about 297 external recipients. The account had been abused for roughly two months first. KMicro contained it. There was no confirmed lateral movement into Google Workspace or the office network.
+
+The investigation could not prove the initial access method. The tenant was on **Entra ID Free**. Identity Protection and Microsoft Graph activity logs were not available. That is a documentation failure and a control failure. Free is not an acceptable steady state.
+
+## Scope
+
+Everyone with an Intertrend identity: staff, contractors, vendors, and shared or service accounts. Covers Entra ID, Microsoft 365, Google Workspace SSO that fronts Entra, and admin consoles (Jamf, FortiGate, backup, DNS).
+
+## Required standard
+
+These are the rules. If a row is not live, it is a gap, not a nice-to-have.
+
+| Control | Required |
+| --- | --- |
+| Entra SKU | **P2 or equivalent** (Business Premium / E5) so Identity Protection and risk-based Conditional Access actually work |
+| MFA | Authenticator with number matching, or a passkey. SMS and voice are **not** standard. Document any exception |
+| Legacy auth | Blocked |
+| Conditional Access | MFA for every user. Compliant or company-managed device for admin roles and sensitive apps. No persistent browser session for privileged roles |
+| Privileged accounts | Separate admin identities for Entra, Google admin, Jamf, and firewall. Daily-driver mailboxes are not Global Admin |
+| App consent | Users cannot grant high-risk OAuth apps. IT reviews enterprise apps after any incident |
+| Offboarding | Same-day revoke of Entra, Microsoft 365 sessions, Google, Slack, and SaaS. Check mailbox rules, forwarding, and app consents |
+| Logging | Sign-in logs retained. Graph activity logging on. SOC (KMicro) can see identity alerts |
+
+Staff setup: [Passwords and MFA](/sops/password-mfa).
+
+## Current state (last documented)
+
+As of the June 2026 incident write-up:
+
+- Tenant was **Entra ID Free**. A license upgrade has been discussed and may already be live. **SKU is not confirmed in this review.**
+- SMS MFA was still registered on at least one mailbox. It was disabled on that account after the incident. Tenant-wide kill of SMS is **not confirmed**.
+- Authenticator was enabled for the affected user after the fact. That is remediation, not a fleet standard until we say it is.
+- DMARC was in monitoring and moved toward enforcement. **Reject-on-all-domains is not confirmed.**
+- Conditional Access existed as a recommendation, not as a published control set.
+
+If you already turned P2 / Business Premium and CA on, say so. This page will drop the hedge.
+
+## Open gaps
+
+1. Confirm Entra SKU and that Identity Protection is **on**, not just licensed.
+2. Publish the live Conditional Access list (or attach it in Drive and link it here). A policy that lives only in a consultant deck is not a control.
+3. Disable SMS and voice MFA tenant-wide. Keep a break-glass process that is not SMS.
+4. Require phishing-resistant MFA (passkey or certificate) for every admin role.
+5. Turn on Microsoft Graph activity logging and send it to the SOC. We already paid for not having this once.
+6. Separate admin accounts. If Tate or Sam is Global Admin on a daily mailbox, that is the next incident path.
+7. Jamf Pro admin login is still Jamf ID, not Entra SSO (March 2026 health check). Low urgency, still a hole.
+
+## Staff rules
+
+- Never approve an MFA prompt you did not start. That is how device-code and MFA-fatigue attacks work.
+- Do not use SMS as your only factor.
+- Report a prompt you did not expect the same way you report phishing: `/assist` or [help@intertrend.atlassian.net](mailto:help@intertrend.atlassian.net).
+- Do not enroll a personal Microsoft account for company mail.
+
+Violations can mean revoked access. Exceptions go through the IT Exceptions process, not Slack DMs.
+
+Related: [Remote access](/policies/remote-access), [Incident response](/policies/incident-response), [Offboarding](/sops/employee-offboarding).
+
+Sources: June 2026 M365 incident summary (Drive); KMicro recommendations; unpublished Notion SOP _Password Management & MFA (EntraID)_. Do not copy client names or recipient lists onto this site.

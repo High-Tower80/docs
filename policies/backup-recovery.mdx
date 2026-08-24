@@ -7,42 +7,50 @@ noindex: true
 ---
 
 <Note>
-  Intertrend IT Standards. Version 1.1, February 2024. Owner: IT Security.
+  Intertrend IT standard, August 2026. Updates the February 2024 Drive policy. Owner: IT. KMicro runs the on-prem / server backups.
 </Note>
 
 ## Purpose
 
-Protect Intertrend data so a delete, outage, or ransomware event is recoverable.
+A delete, outage, or ransomware event is recoverable. A number on a slide is not a restore.
 
 ## What is backed up
 
-- Google Workspace: Gmail, Drive, Docs, Sheets, Slides, Calendar, Contacts, Shared Drives
-- Internal servers and financial apps (via the MSP)
-- Cloud instances, configs, and logs that matter to operations
+- **Google Workspace** (Backblaze B2): Gmail, Drive, Docs, Sheets, Slides, Calendar, Contacts, Shared Drives
+- **Headquarters servers** (KMicro managed backup), including domain, certificate services, RDS, and SQL. Host names stay in the MSP runbook, not in Slack
+- Cloud instances, configs, and logs that operations actually need
+
+If a SaaS app is not in this list, assume it is **not** backed up unless IT said so in a ticket.
 
 ## Cadence
 
 | Data | How often | Keep |
 | --- | --- | --- |
-| Google Workspace to Backblaze B2 | Daily, plus incremental every 4 hours for critical files | Drive versions 90 days; Gmail/Calendar/Contacts 1 year |
-| Financial apps and internal servers | Daily by MSP; monthly full encrypted offsite | Annual archive for compliance |
+| Google Workspace to Backblaze B2 | Daily, plus incremental every 4 hours for critical files | Drive versions 90 days; Gmail / Calendar / Contacts 1 year |
+| HQ servers (KMicro) | Daily; monthly full encrypted offsite | Annual archive for compliance |
 
-All backups encrypted in transit and at rest (AES-256). MFA required to reach backup consoles. Unauthorized delete is blocked where the platform allows it.
+Encrypted in transit and at rest (AES-256). MFA on backup consoles. Unauthorized delete blocked where the platform allows it. Backup admin is IT and KMicro only.
 
 ## Restore targets
 
 - **RPO:** no more than 4 hours of data loss
 - **RTO:** critical data back within 1 hour
-- IT runs quarterly restore drills
 
-**How a restore goes:** assess what is missing → Backblaze for Workspace or MSP for servers/finance → restore to original or alternate location → check integrity → tell affected users → review logs.
+Those targets are the standard. **Last successful restore drill is not dated on this site.** Until IT files a dated Workspace restore and a dated server restore, treat the RTO as an objective, not a tested fact. Do not tell a carrier or a client we "test quarterly" unless you can point at the last ticket.
 
-Priority in a major event: executive mail, active Drive projects, financial systems, customer contracts and compliance files.
+**How a restore goes:** assess what is missing → Backblaze for Workspace or KMicro for servers → restore to original or alternate location → check integrity → tell affected users → review logs.
+
+Priority in a major event: executive mail, active Drive jobs, financial systems, customer contracts and compliance files.
 
 Need a file back? [Submit a help ticket](/how-to/submit-a-help-ticket). Do not ask in a public channel with client names.
 
-Reviewed annually. Access to backup admin is IT and MSP only.
+## Open gaps
+
+1. File the last restore test (date, what was restored, how long it took, who signed off).
+2. Confirm Backblaze still covers every Shared Drive that matters. Shared Drive sprawl is how we miss a job.
+3. Confirm MFA and immutable / object-lock settings on B2. Ransomware that can delete backups is not a hypothetical.
+4. SaaS apps outside Workspace (Notion, Figma, Hub, etc.) need an explicit "backed up" or "accepted loss" decision. Silence is accepted loss.
 
 Related: [Incident response](/policies/incident-response).
 
-Source: Drive _NEW_ (Backup and Recovery Policy). Copy only.
+Sources: Drive backup policy ("NEW", Feb 2024); KMicro managed backup line items (servers still under contract August 2026).

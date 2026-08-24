@@ -1,65 +1,88 @@
 ---
 title: "Endpoint Security Policy"
 sidebarTitle: "Endpoint security"
-description: "Jamf Protect, FileVault, and rules for company Macs and iOS."
+description: "Jamf Pro and Protect, FileVault, Apple Silicon standard, and Intel retirement."
 icon: "laptop"
 noindex: true
 ---
 
 <Note>
-  Intertrend IT Standards. Version 1.0, February 2024. Owner: IT Security. Approved by COO / IT.
+  Intertrend IT standard, August 2026. Updates the February 2024 Drive policy with the March 2026 Jamf Pro health check. Owner: IT. Approved with COO on the annual cycle.
 </Note>
 
 ## Purpose
 
-Secure every company-managed Apple endpoint against malware, unauthorized apps, and data loss.
+Every company Mac and company iOS device is enrolled, encrypted, and monitored. Unenrolled devices do not get company resources. That is not a slogan. It is the access rule.
 
 ## Scope
 
-- Company Macs (laptops and desktops)
-- Company iPhone and iPad
-- Any future company-supported Apple device that joins Intertrend network or cloud services
+- Company Macs at Long Beach and Plano, plus remotes
+- Company iPhone / iPad (meeting-room iPads included)
+- Any Apple device that touches Intertrend network or cloud services
 
-## Standard
+Windows leftovers, if any still exist, stay on Microsoft Defender and are not a supported staff standard. Do not buy more of them.
 
-**Jamf Protect** is the endpoint platform. **Jamf Pro** is required MDM. Devices not enrolled do not get company resources.
+## Hardware standard
 
-Do not disable, uninstall, or tamper with Jamf Protect. Keep OS and Jamf policies current.
+**New issue:** Apple Silicon MacBook Air or MacBook Pro only. M-series. FileVault escrowed to Jamf before the machine leaves IT.
 
-## Requirements
+**Do not issue:** Intel Macs, personal machines as a daily driver, or anything that cannot take a current macOS that supports Declarative Device Management.
 
-**Protection**
+The live fleet is mostly M1–M4 Airs and Pros. Inventory still has Intel leftovers (2015–2019 iMacs / Airs / Pros, a 2012 mini, a 2013 Mac Pro). Those are exceptions on a retirement list, not a second standard. If a machine cannot run a current macOS, it does not get new client work and it does not stay a daily driver.
 
-- Jamf Protect monitors for malware, ransomware, and suspicious behavior
-- Only apps from the Intertrend IT App Store
-- FileVault on, firewall on
-- USB and external drives restricted to limit exfiltration
-- Compliance checked before access (zero trust)
+Request path: [Hardware](/sops/hardware-request).
 
-**Network**
+## Required controls
 
-- Remote access uses Intertrend VPN (Google Workspace identity)
-- Office Wi-Fi is for managed, compliant devices only
-- Jamf Protect DNS filtering blocks known-bad sites
+| Control | Required |
+| --- | --- |
+| MDM | Jamf Pro. User-initiated enrollment today. Target is Apple Business Manager \+ ADE so a wipe re-enrolls itself |
+| EDR | Jamf Protect. Tamper prevention on. Do not uninstall it |
+| Disk | FileVault on, key in Jamf |
+| Firewall | macOS firewall on |
+| Apps | Jamf Self Service / App Catalog. No random downloads for company work |
+| Updates | Current macOS. Nudge (or equivalent) for enforced updates. Ventura and older cannot use DDM update enforcement |
+| Lost / stolen | Report immediately. Remote lock / wipe is enabled |
+| Admin | Local admin is not a staff entitlement. IT grants it for a reason and takes it back |
 
-**Mobile**
+Do not disable, uninstall, or "just for a minute" tamper with Jamf or Protect. Events go to Protect. Report odd behavior via [Submit a help ticket](/how-to/submit-a-help-ticket).
 
-- No jailbroken or rooted devices
-- Face ID or Touch ID required for corporate access
-- Report lost or stolen devices to IT immediately — remote wipe is enabled
+## Current state (March 2026 Jamf health check, ~80 devices)
 
-**If something looks wrong**
+What is actually true, not what the 2024 PDF wished:
 
-Jamf can quarantine a device and isolate it from the network. Events go to Intertrend’s SIEM. Report odd behavior via [Submit a help ticket](/how-to/submit-a-help-ticket).
+- Jamf Protect is deployed. Tamper prevention was turned on during that engagement.
+- FileVault is enforced by configuration profile.
+- MDM Push certificate had **expired (Nov 2024)** and was the reason Wi-Fi profiles and App Catalog installs were stuck. Renewed to **5 March 2027**. Put a reminder 30–45 days before that date. Same Apple ID or you re-enroll the fleet.
+- Enrollment is still **manual**. ADE token expired. **Apple Business Manager is not in use.** PreStage exists and is idle.
+- VPP token expired in 2018. Meeting-room iPads cannot silently install apps.
+- Entra ID is the Cloud Identity Provider for user lookup. Jamf _admin_ login is still Jamf ID, not Entra SSO.
+- Unused Jamf accounts were still present (IT Glue, Jira, API reader, Bob Jones). Enrollment account was **Administrator** and should be Enrollment Only.
+- Graph API SMTP test was **failing**. No reliable email alerts for cert expiry or enrollment failure.
+- CIS Level 1 benchmark: available, **not configured**.
+- Blueprints (DDM): two exist, **not deployed**.
+- Chrome was only ~12% on latest at the check. Patch reporting is not the same as patch enforcement.
+- Some Macs still on macOS 13 (Ventura) or older.
 
-## Your job
+If you closed those items after March, say so. Until then they stay on the gap list.
 
-Stay enrolled. Do not install random software. Follow password, phishing, and acceptable-use rules.
+## Open gaps
 
-Non-compliance can mean revoked access, HR review, or the device being turned off.
+1. Kill unused Jamf admin accounts. Demote the enrollment account.
+2. Fix Graph SMTP or we will miss the next APNs expiry the same way we missed the last one.
+3. Stand up Apple Business Manager this refresh cycle, starting with meeting-room iPads and new Macs. Manual enroll does not survive a wipe.
+4. Adopt CIS Level 1 as the written benchmark so the next client questionnaire is not a scramble.
+5. Deploy Blueprints for simple settings. Apple is retiring classic profiles.
+6. Retire Intel and pre-Sonoma machines, or isolate them.
+7. Forward Protect telemetry to the SOC. Discussed in March, not confirmed live.
+8. Do not put enrollment passwords in this site, Slack, or a Doc titled something cute. The existing enrollment runbook in Drive has a shared password in it. Rotate that.
 
-IT audits quarterly. This policy is reviewed annually.
+## Staff rules
 
-Related: [Remote access](/policies/remote-access), [Incident response](/policies/incident-response), [Hardware request](/sops/hardware-request).
+Stay enrolled. Do not install random software. Lost device = `/assist` immediately. Jailbroken or rooted devices are out.
 
-Source: Drive _IT\_EndpointSecurityPolicy_. Copy only.
+Non-compliance means revoked access or the device getting turned off. IT audits quarterly.
+
+Related: [Identity and Entra](/policies/identity-entra), [Remote access](/policies/remote-access), [Hardware](/sops/hardware-request).
+
+Sources: Drive _IT\_EndpointSecurityPolicy_ (2024); Jamf Pro Health Check, 5 March 2026; live Jamf inventory (do not publish the sheet).
