@@ -7,12 +7,24 @@ noindex: true
 ---
 
 <Warning>
-  PLACEHOLDER. This is not the Conditional Access standard. Do not cite this page on a questionnaire until IT pastes the live list.
+  This is not a Conditional Access standard. We cannot create CA policies today. Do not tell a client or auditor we have Conditional Access.
 </Warning>
 
-**Status:** NEEDED<br />**Owner:** IT<br />**Blocks:** [Identity](/policies/identity-entra) still saying CA is a recommendation, not a control.
+**Status:** CONFIRMED BLOCKED — 24 August 2026<br />**Owner:** IT<br />**License floor:** Entra ID **P1** to create CA. **P2** (or E5 / EMS E5) for Identity Protection user-risk / sign-in-risk policies.
 
-## Fill with
+## What we checked
+
+Microsoft 365 admin → Licenses: **Business Standard** 71 assigned / 80 total. No Entra Premium, P1, P2, Business Premium, E3, or E5.
+
+Entra → ID Protection → User risk policy: enforcement toggles greyed out. Banner: P2 customers only; others can only disable.
+
+Entra → Conditional Access → new policy: **not sufficient licensing.**
+
+So the missing list is not “we forgot to paste it.” The product will not let us write one.
+
+## After P1 exists
+
+Then this page becomes the live list:
 
 - Policy name in Entra
 - Who it applies to
@@ -20,10 +32,8 @@ noindex: true
 - Enabled or report-only
 - Date last reviewed
 
-A screenshot in Drive plus a table here is enough. Do not paste secrets.
+Until then the required standard stays on [Identity](/policies/identity-entra). The control does not exist.
 
-## Still unknown
-
-SKU, Identity Protection on/off, SMS tenant-wide. See the [board](/needed/board).
+Still open on the [board](/needed/board): SMS tenant-wide, DMARC.
 
 Related: [Identity](/policies/identity-entra), [Passwords and MFA](/sops/password-mfa).
