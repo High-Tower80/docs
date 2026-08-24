@@ -1,0 +1,69 @@
+---
+title: "Needed and lacking"
+sidebarTitle: "Board"
+description: "Reminder board: facts still needed, placeholder pages, and what stays out of Mintlify on purpose."
+icon: "hourglass-half"
+noindex: true
+---
+
+<Warning>
+  This list is the reminder. A blank row is not a control. Do not tell a client, carrier, or auditor we have something that still says NEEDED.
+</Warning>
+
+Mintlify is the locked policy book. The wiki stays the everyday handbook. This page is what the book is **missing** or still hedging. Only the knowledge expert for that row proposes the fill-in.
+
+Last pass: August 2026. Close a row by writing the real page, then delete the hedge. Do not delete the row to look finished.
+
+## Facts we still need (IT)
+
+Answer these and the policy hedges go away. Three that matter first: Entra SKU, SMS dead tenant-wide, DMARC on which domains.
+
+| Item | Status | Where it lands |
+| --- | --- | --- |
+| Entra SKU (P1 / P2 / Business Premium / E3–E5) and whether Identity Protection is **on** | NEEDED | [Identity](/policies/identity-entra) |
+| Live Conditional Access list (legacy auth, MFA all, device, admin) | NEEDED | [CA placeholder](/needed/conditional-access) |
+| SMS / voice MFA: dead tenant-wide, or only one mailbox? | NEEDED | [Identity](/policies/identity-entra) |
+| DMARC: `none` / `quarantine` / `reject`, which domains | NEEDED | [Network](/policies/network-security) |
+| Separate admin IDs vs Global Admin on daily mailboxes | NEEDED | [Privileged accounts](/needed/privileged-accounts) |
+| Last Workspace restore (date, how long) | NEEDED | [Restore log](/needed/restore-log) |
+| Last HQ server restore (date, how long) | NEEDED | [Restore log](/needed/restore-log) |
+| Last IR tabletop (date) | NEEDED | [Incident response](/policies/incident-response) |
+| Protect telemetry into KMicro | NEEDED | [Jamf operations](/jamf/operations) |
+| Jamf March punch-list closed? Unused accounts, enrollment privilege, Graph SMTP, Nudge | NEEDED | [Jamf operations](/jamf/operations) |
+| ABM / ADE this refresh or later | NEEDED | [Jamf operations](/jamf/operations) |
+| Jamf enrollment shared password rotated | NEEDED | Stays in the password manager. Confirm here only: rotated Y/N |
+
+Confirmed and closed: **Jamf Protect is the only EDR. No Microsoft Defender for Endpoint.**
+
+## Placeholder pages (not written yet)
+
+These exist so the hole has a URL. Empty on purpose.
+
+| Placeholder | Why we need a real page |
+| --- | --- |
+| [Conditional Access](/needed/conditional-access) | A policy that lives only in Entra or a consultant deck is not audit-ready |
+| [Restore log](/needed/restore-log) | RTO of 1 hour is a claim until a dated drill exists |
+| [Privileged accounts](/needed/privileged-accounts) | Who is Global Admin, and on which mailbox |
+| [Exceptions](/needed/exceptions) | The IT Exceptions process is named in policy. The register is not |
+
+## Not on this site (on purpose)
+
+Leave these in the wiki or Drive. A missing page here is not a bug.
+
+- Everyday handbook, rooms, how-to that still moves weekly → wiki
+- Client-tuned addenda → Drive
+- Credentials, Wi-Fi, FileVault personal keys, enrollment passwords → password manager
+- Insurance filings, E&O, recipient lists, names from incidents → Drive
+- Full ISO / PCI annex → Drive
+
+## Site leftovers
+
+| Item | Status |
+| --- | --- |
+| Org-member lock | On. Confirm the login wall in a private window |
+| Invite VIP readers | [Org members](https://app.mintlify.com/settings/organization/members) |
+| Shared site password | Hobby cannot do it. Pro later if you want it. Do not Slack the password |
+| Jamf live connection in Cursor | Parked. Read-only client first. [Connect Cursor](/jamf/connect-cursor) |
+| Custom domain `intertrendhub.com/docs` | Hub owns that path. Use mintlify.app |
+
+When a row is done, say so. We will replace NEEDED with a date and a link.
