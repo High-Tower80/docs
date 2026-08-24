@@ -137,7 +137,8 @@
     "color": {
       "light": "#FAF7F2",
       "dark": "#161412"
-    }
+    },
+    "decoration": "gradient"
   },
   "search": {
     "prompt": "Search internal docs..."
@@ -153,5 +154,9 @@
         "dark": "github-dark"
       }
     }
+  },
+  "banner": {
+    "content": "Internal policy book — clay Maple theme. Everyday handbook stays on the [Company Wiki](https://wiki.intertrendhub.com).",
+    "dismissible": true
   }
 }
