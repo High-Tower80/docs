@@ -41,24 +41,24 @@ These are the rules. If a row is not live, it is a gap, not a nice-to-have.
 
 Staff setup: [Passwords and MFA](/sops/password-mfa).
 
-## Current state (last documented)
+## Current state (24 August 2026)
 
-As of the June 2026 incident write-up:
+Checked in Microsoft 365 admin (Licenses) and Entra ID Protection.
 
-- Tenant was **Entra ID Free**. A license upgrade has been discussed and may already be live. **SKU is not confirmed in this review.**
-- SMS MFA was still registered on at least one mailbox. It was disabled on that account after the incident. Tenant-wide kill of SMS is **not confirmed**.
-- Authenticator was enabled for the affected user after the fact. That is remediation, not a fleet standard until we say it is.
-- DMARC was in monitoring and moved toward enforcement. **Reject-on-all-domains is not confirmed.**
-- Conditional Access existed as a recommendation, not as a published control set.
+- The only paid SKU is **Microsoft 365 Business Standard** (71 of 80 assigned). Copilot Studio / Fabric / Power Automate free trials do not count.
+- **No Entra Premium. No P1, P2, Business Premium, E3, or E5.**
+- Identity Protection screens open, but user-risk, sign-in-risk, and MFA-registration **policy enforcement is greyed out**. Banner: P2 customers only.
+- Creating a Conditional Access policy fails: **not sufficient licensing**. P1 is the floor for CA. P2 (or E5 / EMS E5) is the floor for automated Identity Protection policies.
+- June 2026 was Entra ID Free. This is not a silent upgrade. We are still below the standard on this page.
 
-If you already turned P2 / Business Premium and CA on, say so. This page will drop the hedge.
+SMS tenant-wide and DMARC reject are still **unconfirmed**. See the [board](/needed/board).
 
 ## Open gaps
 
-1. Confirm Entra SKU and that Identity Protection is **on**, not just licensed.
-2. Publish the live Conditional Access list (or attach it in Drive and link it here). A policy that lives only in a consultant deck is not a control.
+1. **Buy the license or stop claiming the control.** P1 at minimum so Conditional Access can exist. P2 (or equivalent) so Identity Protection policies can be turned on. Until then, do not write "we have CA" or "we have Identity Protection" on a questionnaire.
+2. After P1: publish the live CA list on [Conditional Access](/needed/conditional-access). After P2: turn on user-risk and sign-in-risk policies.
 3. Disable SMS and voice MFA tenant-wide. Keep a break-glass process that is not SMS.
-4. Require phishing-resistant MFA (passkey or certificate) for every admin role.
+4. Require phishing-resistant MFA (passkey or certificate) for every admin role. Needs a real CA policy, which needs P1.
 5. Turn on Microsoft Graph activity logging and send it to the SOC. We already paid for not having this once.
 6. Separate admin accounts. If Tate or Sam is Global Admin on a daily mailbox, that is the next incident path.
 7. Jamf Pro admin login is still Jamf ID, not Entra SSO (March 2026 health check). Low urgency, still a hole.
