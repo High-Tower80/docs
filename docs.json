@@ -47,13 +47,19 @@
             "icon": "scale-balanced",
             "pages": [
               "policies/overview",
+              "policies/global-infosec",
               "policies/endpoint-security",
               "policies/identity-entra",
               "policies/remote-access",
               "policies/network-security",
               "policies/backup-recovery",
               "policies/incident-response",
-              "policies/generative-ai"
+              "policies/generative-ai",
+              "policies/bcdr",
+              "policies/resiliency",
+              "policies/third-party-risk",
+              "policies/data-retention",
+              "policies/pii-retention"
             ]
           },
           {

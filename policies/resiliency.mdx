@@ -1,0 +1,88 @@
+---
+title: "IT Resiliency Strategy"
+sidebarTitle: "Resiliency strategy"
+description: "How the security policies fit together to keep Intertrend running, and how each part is tested."
+icon: "arrows-rotate"
+noindex: true
+keywords: ["resiliency", "resilience", "continuity", "cloud-first", "RFP"]
+---
+
+<Info>
+  **Version** 2026.1 · **Status** Approval pending · **Updated** October 2026 · **Next review** October 2027<br />
+  **Owner** Tate Allen, IT Manager · **Reviewer** Flo Kuraoka, Operations Director · **Approver** Wade Guang, CFO and COO<br />
+  **Source of truth:** [IT_ResiliencyStrategy_2026](https://docs.google.com/document/d/1a00UBRE6QKofevCXjgLdDvSoPAwbXlWRi7nieS3Wim0/edit) in Drive. Sharing: **External OK** once approved.
+</Info>
+
+## Purpose
+
+This document describes how Intertrend Communications keeps its business operating, protects client data, and recovers quickly when systems, facilities, vendors, or people are disrupted. It ties together the controls defined in Intertrend's information security policies and plans into one strategy, and identifies how each part is tested.
+
+## Scope
+
+This strategy covers Intertrend's Long Beach, California and Plano, Texas offices, all staff and contractors, the cloud platforms that hold company and client data, and the third parties that support Intertrend's IT operations.
+
+## Strategy overview
+
+Intertrend's resiliency approach is **cloud-first and identity-centric**. Core business data and collaboration tools are hosted in Google Workspace, access is controlled through Microsoft Entra ID with multi-factor authentication, data is backed up nightly to an independent provider, and the environment is monitored by an external security operations team. Because primary systems do not depend on a single office, loss of a facility does not stop the work.
+
+## Resiliency pillars
+
+### Identity and access
+
+- Microsoft Entra ID is the central identity provider, and multi-factor authentication is required for staff accounts.
+- Access to systems and client data is granted by role and revoked promptly when a person leaves or changes roles.
+
+Detail: [Identity and Entra](/policies/identity-entra).
+
+### Data protection and recovery
+
+- Company data is stored in Google Workspace.
+- Data is backed up nightly to Backblaze, a provider independent of Google, so a problem with the primary platform does not affect the backup copy.
+- Backups are encrypted in transit and at rest.
+- A backup restoration test is performed annually, and the results are documented.
+
+Detail: [Backup and recovery](/policies/backup-recovery).
+
+### Detection and response
+
+- KMicro provides security operations center (SOC) services, including continuous monitoring and vulnerability scanning through a SIEM platform.
+- KMicro delivers monthly security reports to the IT Manager for review.
+- Security incidents are handled under the [Cybersecurity Incident Response Plan](/policies/incident-response), which defines roles, response phases, and communication steps.
+
+### Facilities
+
+- Office entry is controlled electronically by key card or fob, facial recognition, or a mobile credential that requires a PIN.
+- Visitors are admitted by appointment only and are escorted while on premises.
+- At Long Beach, cameras record entry points 24/7 with footage retained for 30 days. At Plano, a UniFi doorbell camera records the entry vestibule 24/7. Nest cameras cover interior areas at all offices.
+- The Long Beach office is protected by a permitted alarm system serviced by ADT.
+- Network equipment and on-premises servers are kept in a locked server room with access limited to IT staff.
+
+### Third parties
+
+Vendors that support critical IT services or handle company or client data are identified, assessed, and reviewed under the [Third Party Risk Management Policy](/policies/third-party-risk). This reduces the chance that a vendor failure becomes an Intertrend outage or data exposure.
+
+### Business continuity
+
+The [Business Continuity and Disaster Recovery Plan](/policies/bcdr) defines critical IT services, recovery strategies, emergency procedures, and team responsibilities. If an office becomes unavailable, staff continue working on cloud-hosted systems from an approved alternate location.
+
+## Testing and review
+
+| Activity | Frequency | Owner |
+| --- | --- | --- |
+| External penetration test | Annually (most recent: January 2026) | IT Manager |
+| Vulnerability scanning and SIEM monitoring | Continuous, with monthly reporting | KMicro SOC |
+| Backup restoration test | Annually | IT Manager |
+| Risk register review | Semiannually | IT Manager and Operations Director |
+| Critical vendor review | Annually | IT Manager |
+| Review of this strategy, related policies, and the risk register | Annually | IT Manager |
+
+## Related documents
+
+- [Global Information Security Policy](/policies/global-infosec)
+- [Business Continuity and Disaster Recovery Plan](/policies/bcdr)
+- [Backup and Recovery Policy](/policies/backup-recovery)
+- [Cybersecurity Incident Response Plan](/policies/incident-response)
+- [Network Security Policy](/policies/network-security)
+- [Endpoint Security Policy](/policies/endpoint-security)
+- [Remote Access Policy](/policies/remote-access)
+- [Third Party Risk Management Policy](/policies/third-party-risk)

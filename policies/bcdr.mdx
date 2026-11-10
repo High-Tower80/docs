@@ -1,0 +1,100 @@
+---
+title: "Business Continuity and Disaster Recovery Plan"
+sidebarTitle: "BC / DR plan"
+description: "How Intertrend keeps working when an office, system, provider, or key person is unavailable."
+icon: "life-ring"
+noindex: true
+keywords: ["BCDR", "business continuity", "disaster recovery", "outage", "RFP"]
+---
+
+<Info>
+  **Version** 2026.1 · **Status** Approval pending · **Updated** October 2026 · **Next review** October 2027<br />
+  **Owner** Tate Allen, IT Manager · **Reviewer** Flo Kuraoka, Operations Director · **Approver** Wade Guang, CFO and COO<br />
+  **Source of truth:** [IT_BCDR_Plan_2026](https://docs.google.com/document/d/1u7BzqlN-LcRV6S_sJqN-ivIKuD9VwmEHXztcX3RKoac/edit) in Drive. Sharing: **External OK** once approved.
+</Info>
+
+## 1. Purpose
+
+This plan describes how Intertrend Communications keeps working and recovers its IT services when an office, a system, a provider, or key staff become unavailable. It identifies critical services, assigns responsibilities, and sets out how the plan is activated, tested, and kept current.
+
+## 2. Scope
+
+This plan covers the Long Beach, California and Plano, Texas offices, all staff and contractors, and the systems listed in section 3. Detailed backup and restore requirements are in the [Backup and Recovery Policy](/policies/backup-recovery), and the response to security incidents is in the [Cybersecurity Incident Response Plan](/policies/incident-response).
+
+## 3. Critical services
+
+| Service | Platform | Notes |
+| --- | --- | --- |
+| Identity and sign-in | Microsoft Entra ID | Also provides SSO to Google Workspace. Hosted by Microsoft |
+| Email, files, calendars | Google Workspace | Backed up nightly to Backblaze |
+| Internal messaging | Slack | Backup channel if email is unavailable |
+| Staff computers | Apple devices in Jamf, Jamf Protect | Replacements enroll through Jamf and receive the same settings |
+| On-premises servers and business apps | Windows servers | Microsoft Defender; backed up offsite by KMicro |
+| Network and remote access | FortiGate firewalls and VPN at all offices | UniFi wireless and access control equipment |
+| Security monitoring | KMicro SOC | 24/7 |
+
+## 4. Disruption scenarios
+
+<AccordionGroup>
+  <Accordion title="4.1 Office unavailable">
+    If an office cannot be used because of fire, flooding, power loss, or a building access problem, staff work remotely. Core systems are cloud-hosted, so work continues from any location with internet access, and the VPN provides access to on-premises resources. **Target:** staff able to work on core systems within 24 hours.
+  </Accordion>
+  <Accordion title="4.2 Internet outage at an office">
+    Staff move to remote work or use company mobile devices as hotspots until service is restored. IT works with the internet provider and updates staff through Slack or text.
+  </Accordion>
+  <Accordion title="4.3 Cloud provider outage">
+    IT monitors the provider's status page and tells staff which alternate channel to use, such as Slack during an email outage. If data was lost or damaged, IT restores it from Backblaze once the provider is available.
+  </Accordion>
+  <Accordion title="4.4 Ransomware or account compromise">
+    IT follows the [Cybersecurity Incident Response Plan](/policies/incident-response) first: contain the threat, disable affected accounts, and work with the KMicro security operations center. Systems and data are restored from backups only after the cause is understood, so that compromised data is not restored.
+  </Accordion>
+  <Accordion title="4.5 Loss of key IT staff">
+    If the IT Manager is unavailable, the IT team's backup administrator and KMicro take over. Administrative runbooks and emergency administrator accounts are kept where an authorized backup person can reach them.
+  </Accordion>
+</AccordionGroup>
+
+## 5. Recovery priorities
+
+Services are restored in this order:
+
+1. Identity and sign-in (Microsoft Entra ID)
+2. Email and staff communication (Google Workspace and Slack)
+3. Files and shared drives for active client work
+4. On-premises servers and business applications
+5. Office network, wireless, and building access systems
+
+Recovery point and recovery time objectives for data are defined in the [Backup and Recovery Policy](/policies/backup-recovery).
+
+## 6. Roles and responsibilities
+
+- **CFO and COO (Wade Guang):** declares a disaster, approves emergency spending, and approves client communications.
+- **IT Manager (Tate Allen):** leads technical recovery, coordinates with KMicro and other vendors, and keeps leadership informed.
+- **Operations Director (Flo Kuraoka):** manages facilities, building access, and staff communications.
+- **KMicro:** restores on-premises servers, supports security investigations, and provides security monitoring throughout the recovery.
+- **Staff:** follow instructions from IT and Operations and report problems through the channel announced.
+
+## 7. Activation and communication
+
+1. Anyone who becomes aware of a major disruption reports it to the IT Manager or the Operations Director.
+2. The IT Manager assesses the impact and recommends activation of this plan to the CFO and COO.
+3. Once the plan is activated, staff are notified through Slack, email, or text, depending on which systems are available.
+4. Clients affected by the disruption are notified by their account leads, using wording approved by leadership.
+5. When normal operations resume, the IT Manager confirms recovery and records a summary of the event.
+
+Who to call: Emergency Contact List in Drive (internal only).
+
+## 8. Testing and maintenance
+
+- This plan is reviewed and updated at least annually, and after any major change to systems, offices, or providers.
+- A recovery exercise is performed at least annually. The annual backup restore test serves as the exercise, and may be combined with a walk-through of one scenario from section 4.
+- Results, lessons learned, and corrective actions are recorded, and open items are tracked in the IT risk register.
+
+<Warning>
+  The 2026 restore test is not yet documented. Until it is, the annual exercise is a requirement, not evidence. Track it on the [restore log](/needed/restore-log).
+</Warning>
+
+## 9. Approval
+
+This plan and its updates are approved by the CFO and COO. Exceptions must be documented and approved in writing.
+
+Related: [Global InfoSec policy](/policies/global-infosec), [IT Resiliency Strategy](/policies/resiliency), [Emergency evacuation](/sops/emergency-evacuation).

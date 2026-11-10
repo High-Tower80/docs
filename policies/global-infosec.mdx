@@ -1,0 +1,265 @@
+---
+title: "Global Information Security Policy"
+sidebarTitle: "Global InfoSec policy"
+description: "The umbrella security policy, organized by NIST CSF 2.0. Every other policy hangs off this one."
+icon: "shield-check"
+noindex: true
+keywords: ["infosec", "NIST CSF", "security program", "policy", "RFP"]
+---
+
+<Info>
+  **Version** 2026.1 · **Status** Approval pending · **Updated** October 2026 · **Next review** October 2027<br />
+  **Owner** Tate Allen, IT Manager · **Reviewer** Flo Kuraoka, Operations Director · **Approver** Wade Guang, CFO and COO<br />
+  **Source of truth:** [IT_GlobalInfoSecPolicy_2026](https://docs.google.com/document/d/1jG3YWEE-BDENTtQaPxnr-OrB-EK_a9Rpf-MU0h7Z9g8/edit) in Drive. Sharing: **External OK** once approved. Send the Drive file to clients, never a link to this site.
+</Info>
+
+## 1. Purpose
+
+This policy sets out how Intertrend Communications protects the confidentiality, integrity, and availability of its information and the information its clients entrust to it. It defines the security requirements that apply across the company, assigns responsibility for meeting them, and links to the topic-specific policies and plans that give operating detail.
+
+## 2. Scope
+
+This policy applies to all Intertrend employees, contractors, interns, and third parties who access Intertrend systems or data. It covers the Long Beach, California and Plano, Texas offices, remote work locations, company-owned and approved devices, on-premises servers and network equipment, and cloud services used to store or process company or client data.
+
+## 3. Framework
+
+This policy is organized around the six functions of the NIST Cybersecurity Framework (CSF) 2.0: Govern, Identify, Protect, Detect, Respond, and Recover. Technical requirements are informed by the CIS Critical Security Controls v8.1 and by NIST Special Publication 800-63B for authentication. Intertrend applies these frameworks in proportion to its size and risk, and records gaps and planned improvements in the IT risk register.
+
+## 4. Roles and responsibilities
+
+- **CFO and COO (Wade Guang):** executive owner of information security. Approves this policy, accepts risks above the Medium rating, approves exceptions, and approves security spending.
+- **Operations Director (Flo Kuraoka):** reviews this policy, owns facilities and physical security, and coordinates staff communications during incidents and disruptions.
+- **IT Manager (Tate Allen):** owns this policy and the information security program. Maintains the related policies, the risk register, and the vendor inventory, administers security controls, and leads incident response and recovery.
+- **IT staff:** carry out day-to-day administration, support, and monitoring under the direction of the IT Manager.
+- **KMicro (managed service provider):** provides managed IT services, offsite server backups, and a 24/7 security operations center (SOC) under its service agreement.
+- **Managers:** make sure their teams follow this policy, request and approve access for their staff, and notify IT promptly of new hires, role changes, and departures.
+- **All staff:** follow this policy and the acceptable use requirements in section 14, complete security training, protect their credentials, and report suspected incidents immediately.
+
+---
+
+## Govern
+
+### 5. Policy management
+
+**5.1 Review.** The IT Manager reviews this policy and each related policy at least annually and after any significant change to Intertrend's systems, offices, providers, or legal obligations. Updates are reviewed by the Operations Director and approved by the CFO and COO. Each document records its version, effective date, owner, approver, and next review date.
+
+**5.2 Exceptions.** An exception to this policy must be requested in writing, describe the business reason and the compensating controls, and be approved by the CFO and COO on the recommendation of the IT Manager. Approved exceptions are recorded in the risk register with an expiration date of no more than one year. See [Exceptions](/needed/exceptions).
+
+**5.3 Enforcement.** Violations of this policy may result in loss of system access and disciplinary action up to and including termination of employment or contract. Intertrend may report unlawful activity to the appropriate authorities.
+
+### 6. Risk management
+
+Intertrend maintains a written IT risk register that identifies risks to its information, systems, facilities, and vendors. Each risk is rated by likelihood and impact on a 1 to 5 scale, assigned an owner and a mitigation plan, and tracked to resolution.
+
+- The register is reviewed semiannually by the IT Manager and the Operations Director, and reported annually to the CFO and COO.
+- New risks are added as they are identified, including from incidents, audits, penetration tests, vendor reviews, and SOC reports.
+- Risks rated High require a mitigation plan with a target date. Accepting a High or Medium risk without mitigation requires approval by the CFO and COO.
+
+### 7. Third party risk management
+
+Vendors that store, process, or can access Intertrend or client data, connect to Intertrend systems, or provide services Intertrend depends on are managed under the [Third Party Risk Management Policy](/policies/third-party-risk). That policy defines vendor risk tiers, due diligence before onboarding, required contract terms, annual review of Critical and High vendors, and offboarding.
+
+### 8. Legal, regulatory, and contractual requirements
+
+Intertrend identifies and meets the security and privacy requirements that apply to it, including:
+
+- The California Consumer Privacy Act as amended by the California Privacy Rights Act
+- The Texas Data Privacy and Security Act
+- State data breach notification laws in the states where affected individuals reside
+- The EU and UK General Data Protection Regulation, where Intertrend processes personal data of individuals in those regions on behalf of clients
+- Security, confidentiality, and breach notification terms in client contracts
+
+Where a client contract sets stricter requirements than this policy, the contract governs for that client's data.
+
+---
+
+## Identify
+
+### 9. Asset management
+
+Intertrend maintains an inventory of the assets that store or process its data.
+
+- Apple computers and mobile devices are enrolled and inventoried in Jamf.
+- Servers, firewalls, switches, wireless access points, and access control equipment are recorded with their location, function, and network address in the network documentation maintained by the IT Manager.
+- Cloud services and software subscriptions are recorded with their business owner and the type of data they hold.
+- Every asset has an owner. Devices that are lost or stolen must be reported to IT immediately so they can be locked or wiped remotely.
+- Devices and media are wiped or physically destroyed before disposal, resale, or trade-in, and disposal is recorded.
+
+### 10. Data classification and handling
+
+All information is classified into one of four levels and handled accordingly.
+
+| Level | Examples | Handling |
+| --- | --- | --- |
+| **Public** | Published marketing materials | No restrictions |
+| **Internal** | Internal procedures, schedules | Shared only within Intertrend and with authorized contractors |
+| **Confidential** | Client work product and materials, contracts, financial records, employee information | Need to know only, approved company systems only, encrypted when sent outside Intertrend |
+| **Restricted** | Personal information covered by privacy law, credentials and encryption keys, any data a client designates as restricted | Named individuals only. Never copied to personal accounts, personal devices, removable media, or unapproved AI tools |
+
+When information is not labeled, staff treat client information as Confidential. Client data is kept only as long as the contract or business need requires and is then deleted or returned.
+
+---
+
+## Protect
+
+### 11. Identity and access management
+
+- Microsoft Entra ID is Intertrend's identity provider. Google Workspace and other supported applications use single sign-on through Entra ID. On-premises servers use a separate Active Directory domain that is not connected to Entra ID. Accounts in that domain follow the same access, password, and review requirements in this policy, and the domain is reachable remotely only through the company VPN.
+- Multi-factor authentication (MFA) is required for all user accounts, administrator accounts, remote access, and email. SMS and voice call are not used as MFA methods. Intertrend is moving toward phishing-resistant methods, such as passkeys, starting with administrator accounts.
+- Access is granted on the principle of least privilege, based on role, and approved by the employee's manager. Access to Restricted data also requires IT Manager approval.
+- Accounts are created only after a hire is confirmed and are disabled on or before the person's last working day. Access is updated when someone changes roles.
+- Administrators use separate administrator accounts for privileged tasks. Emergency (break-glass) administrator accounts are kept, protected with strong credentials, and monitored for use.
+- Shared and generic accounts are not permitted unless approved by the IT Manager and assigned to a named owner.
+- Privileged access is reviewed semiannually, and all user access is reviewed at least annually.
+- Users may not approve third-party application access (OAuth consent) to company data without IT approval.
+
+Operating detail and current licensing state: [Identity and Entra](/policies/identity-entra).
+
+### 12. Passwords and credentials
+
+Password requirements follow NIST SP 800-63B.
+
+- Passwords must be at least 14 characters. Passphrases are encouraged.
+- Passwords are not changed on a fixed schedule. They must be changed immediately when there is any sign of compromise.
+- New passwords are checked against lists of known breached and commonly used passwords.
+- Passwords may not be reused across work and personal accounts or shared with anyone, including IT.
+- System, service, and shared credentials are stored in an approved password manager. Credentials may not be stored in documents, spreadsheets, email, chat, or code.
+- Default passwords on devices and applications are changed before the device or application is put into use.
+
+### 13. Security awareness training
+
+- All staff complete security awareness training when they join Intertrend and at least annually after that.
+- Training covers phishing and social engineering, credential protection, data handling, safe use of AI tools, and how to report an incident.
+- Staff report suspicious email using the phishing report option or by contacting IT. Reporting a mistake promptly is expected and is not penalized.
+
+### 14. Acceptable use
+
+- Company systems are provided for business use. Limited personal use is permitted when it does not interfere with work, violate law or policy, or put company data at risk.
+- Company and client data may be stored only in approved company systems, and may not be forwarded or synced to personal email or personal cloud storage.
+- Staff may not disable or bypass security controls, install unapproved software, or connect unapproved devices to the company network.
+- Screens are locked when unattended, and devices are never left unattended in public places.
+- Use of company systems may be monitored for security purposes, as permitted by law.
+
+### 15. Endpoint security
+
+- Apple computers and mobile devices are managed through Jamf, and computers are protected by Jamf Protect for malware prevention and threat detection.
+- Windows servers are protected by Microsoft Defender.
+- Full-disk encryption, automatic screen lock, and a firewall are required on all company computers.
+- Operating systems and applications are kept on supported versions. Security updates are applied within 14 days for critical vulnerabilities, or sooner when a vulnerability is being actively exploited, and within 30 days for other security updates.
+- Endpoint security alerts are monitored by IT and the KMicro SOC.
+- Personal devices may access company email and files only through approved applications and only with MFA. Company data may be removed from any device remotely when an employee leaves or a device is lost.
+
+Operating detail: [Endpoint security](/policies/endpoint-security).
+
+### 16. Network security
+
+Detailed requirements are in the [Network Security Policy](/policies/network-security) and the [Remote Access Policy](/policies/remote-access).
+
+- FortiGate firewalls protect the network perimeter at every office. Inbound traffic is denied by default, and only documented, approved services are allowed.
+- Remote access to internal resources uses the company VPN with MFA.
+- Networks are segmented. Staff devices, guest access, smart devices, servers, and building access control systems are kept on separate networks or VLANs. Building tenants and visitors never share the staff network.
+- Wireless networks use WPA2-Enterprise or WPA3. Guest wireless is isolated from internal networks.
+- Management interfaces for firewalls, switches, and access points are not exposed to the internet and use encrypted protocols.
+- Network device firmware is kept current, and configurations are backed up after each significant change.
+- Network diagrams for each office are kept current and reviewed annually.
+
+### 17. Email and web security
+
+- Intertrend publishes SPF and DKIM records for its domains and maintains a DMARC policy, moving to enforcement (quarantine or reject) as reporting confirms legitimate mail is aligned.
+- Email is filtered for spam, malware, and phishing.
+- Links to known malicious domains are blocked as they are identified.
+
+### 18. Data protection and encryption
+
+- Data is encrypted in transit using TLS 1.2 or higher, and encrypted at rest in cloud services, on company computers, and in backups.
+- Confidential and Restricted data sent outside Intertrend is shared through approved services with access limited to named recipients.
+- External sharing settings in Google Workspace are configured to limit public and anonymous links to company data.
+- Encryption keys for company systems are managed by the service provider or stored in an approved password manager.
+
+### 19. Cloud services and software
+
+- New cloud services and software that will hold company or client data must be approved by IT before use and reviewed under the [Third Party Risk Management Policy](/policies/third-party-risk).
+- Approved services use single sign-on through Entra ID where the service supports it.
+- Administrator settings and security recommendations in Microsoft 365, Entra ID, and Google Workspace are reviewed at least quarterly.
+
+### 20. Artificial intelligence
+
+Use of artificial intelligence tools with company or client data is governed by the [AI Use Policy](/policies/generative-ai). Client data may be used in AI tools only with written approval from Intertrend leadership and the client, and only in tools approved by IT.
+
+### 21. Secure configuration and change management
+
+- Servers, network devices, and computers are configured from documented secure baselines informed by CIS Benchmarks, with unneeded services and accounts disabled.
+- Significant changes to production systems, firewalls, and security settings are planned, approved by the IT Manager, recorded, and able to be rolled back.
+- Emergency changes may be made to contain an incident and are recorded afterward.
+
+### 22. Vulnerability management and penetration testing
+
+- The KMicro SOC performs continuous vulnerability scanning and monitoring and provides monthly reports to the IT Manager.
+- An external penetration test is performed at least annually by a qualified third party. The most recent test was completed in January 2026.
+- Vulnerabilities are remediated within these target times: critical within 14 days, high within 30 days, and medium within 90 days. Findings that cannot meet these times are recorded in the risk register with compensating controls.
+
+### 23. Physical and environmental security
+
+- Office entry is controlled electronically by key card or fob, facial recognition, or a mobile credential that requires a PIN. Access is granted by role and removed promptly when no longer needed.
+- Visitors are admitted by appointment only and are escorted while on premises.
+- At Long Beach, cameras record entry points 24/7, with footage retained for 30 days, and the office is protected by an alarm system serviced by ADT. At Plano, a video doorbell camera records the entry vestibule 24/7. Interior cameras cover common areas at all offices.
+- Network equipment and on-premises servers are kept in a locked server room or cabinet with access limited to IT staff.
+- Equipment is protected from water, heat, and power problems as far as practical, and environmental risks are recorded in the risk register.
+
+Staff procedures: [Building access](/sops/building-access), [Visitor access](/sops/visitor-access).
+
+### 24. Backup
+
+Backups are governed by the [Backup and Recovery Policy](/policies/backup-recovery). Google Workspace data is backed up nightly to Backblaze, and on-premises servers are backed up offsite by KMicro. Backups are encrypted in transit and at rest, access requires MFA, and restores are tested at least annually.
+
+### 25. Personnel security
+
+- New staff and contractors agree to confidentiality terms and acknowledge this policy before receiving access, and acknowledge it again after each annual update.
+- Background checks are performed in accordance with Intertrend's human resources practices and applicable law.
+- When a person leaves, their access is removed, and company devices and data are returned. See [Employee offboarding](/sops/employee-offboarding).
+
+---
+
+## Detect
+
+### 26. Logging and monitoring
+
+- Security events from Microsoft 365 and Entra ID, endpoints, and other connected sources are collected in Microsoft Sentinel and monitored 24/7 by the KMicro SOC.
+- The SOC investigates alerts, escalates confirmed threats to the IT Manager, and assists with containment.
+- Sign-in activity from unusual locations is flagged by analytic rules, and staff notify IT in advance of travel outside the United States.
+- Logs are retained according to the KMicro service agreement and are protected from alteration.
+
+---
+
+## Respond
+
+### 27. Incident response
+
+Security incidents are handled under the [Cybersecurity Incident Response Plan](/policies/incident-response).
+
+- Staff report suspected incidents to IT immediately, including lost devices, suspicious email that was opened, and any unexpected account activity.
+- The IT Manager leads the response with support from the KMicro SOC and incident response team, and keeps the CFO and COO informed.
+- Compromised accounts are disabled, sessions and tokens are revoked, and credentials and MFA methods are reset before access is restored.
+- Where an incident affects client or personal data, Intertrend notifies affected clients, individuals, and authorities as required by contract and law.
+- Each significant incident is reviewed afterward, and resulting improvements are tracked in the risk register.
+
+---
+
+## Recover
+
+### 28. Business continuity and recovery
+
+Recovery from disruptions is governed by the [Business Continuity and Disaster Recovery Plan](/policies/bcdr) and the [IT Resiliency Strategy](/policies/resiliency). Core systems are cloud-hosted so that work can continue if an office is unavailable, with a target of restoring staff access to core systems within 24 hours. Recovery is exercised at least annually.
+
+## 29. Related documents
+
+- [Business Continuity and Disaster Recovery Plan](/policies/bcdr)
+- [Backup and Recovery Policy](/policies/backup-recovery)
+- [Cybersecurity Incident Response Plan](/policies/incident-response)
+- [Network Security Policy](/policies/network-security)
+- [Remote Access Policy](/policies/remote-access)
+- [Endpoint Security Policy](/policies/endpoint-security)
+- [Third Party Risk Management Policy](/policies/third-party-risk)
+- [AI Use Policy](/policies/generative-ai)
+- [IT Resiliency Strategy](/policies/resiliency)
+- IT Risk Register (Drive, internal only)

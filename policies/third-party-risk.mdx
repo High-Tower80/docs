@@ -1,0 +1,108 @@
+---
+title: "Third Party Risk Management Policy"
+sidebarTitle: "Third party risk"
+description: "Vendor tiers, due diligence, contract terms, review cadence, and offboarding."
+icon: "handshake"
+noindex: true
+keywords: ["TPRM", "vendor risk", "vendors", "due diligence", "SOC 2", "RFP"]
+---
+
+<Info>
+  **Version** 2026.1 · **Status** Approval pending · **Updated** October 2026 · **Next review** October 2027<br />
+  **Owner** Tate Allen, IT Manager · **Reviewer** Flo Kuraoka, Operations Director · **Approver** Wade Guang, CFO and COO<br />
+  **Source of truth:** [IT_ThirdPartyRiskManagementPolicy_2026](https://docs.google.com/document/d/1im-4XUCsix1TImevgSbDJ_Y9GVKB2EHumATpcAIOCs4/edit) in Drive. Sharing: **External OK** once approved.
+</Info>
+
+<Warning>
+  The vendor inventory itself is **internal only** and is not on this site. Never send it to a client. If a client asks, describe the tiers and the review cadence instead.
+</Warning>
+
+## Purpose
+
+This policy sets out how Intertrend Communications identifies, assesses, contracts with, monitors, and offboards third parties that support its operations or have access to company or client data. Its goal is to make sure vendors meet a level of security and reliability appropriate to the risk they introduce.
+
+## Scope
+
+This policy applies to any vendor, contractor, consultant, service provider, or software platform that does at least one of the following:
+
+- Stores, processes, or can access Intertrend or client data
+- Connects to Intertrend networks, systems, or accounts
+- Provides a service Intertrend depends on to operate or to deliver client work
+
+Low-risk purchases with no data access and no system connection, such as office supplies, are out of scope.
+
+## Roles and responsibilities
+
+- **IT Manager:** owns this policy, maintains the vendor inventory, performs security reviews, and approves vendors from an IT and security standpoint.
+- **Requesting department:** identifies the business need, the data involved, and a business owner for the relationship.
+- **Operations and Finance:** review contracts, insurance, and cost before signature.
+- **Executive leadership:** approves Critical vendors and any exceptions to this policy.
+
+## Vendor inventory
+
+The IT Manager maintains an inventory of in-scope vendors that records the vendor name, service provided, business owner, data accessed, risk tier, contract dates, and the date of the last review. The inventory is reviewed whenever a vendor is added or removed and at least annually. It is kept as a separate internal record and is not distributed outside Intertrend.
+
+## Risk tiering
+
+Each vendor is assigned a tier before onboarding, based on the data it can access and how much Intertrend depends on it.
+
+| Tier | Criteria | Examples |
+| --- | --- | --- |
+| **Critical** | Administrative access to Intertrend systems, or hosts core business or client data, or an outage would stop operations | Managed IT and SOC provider, identity provider, primary productivity platform, backup provider |
+| **High** | Stores or processes confidential, personal, or client data | Payroll and HR platforms, client collaboration tools, consultants with data access |
+| **Moderate** | Limited data access or a supporting service with workarounds available | Telecom carriers, physical security providers, hardware resellers |
+| **Low** | No access to data or systems | General services with no system connection |
+
+## Due diligence before onboarding
+
+Requirements scale with the tier.
+
+- **Critical and High:** a completed security questionnaire, a current SOC 2 Type II report or ISO 27001 certificate (or an equivalent explanation of controls), confirmation of multi-factor authentication and encryption of data in transit and at rest, a summary of the vendor's incident response and breach notification process, and evidence of cyber liability insurance.
+- **Moderate:** a short security questionnaire and confirmation of how the vendor protects any Intertrend information it holds.
+- **Low:** no security review required beyond standard purchasing.
+
+Vendors that will use artificial intelligence on Intertrend or client data must also meet the requirements of the [AI Use Policy](/policies/generative-ai).
+
+New software or SaaS request? Start with [Software and SaaS access](/sops/software-saas-access).
+
+## Contract requirements
+
+Contracts with Critical and High vendors include, where applicable:
+
+- Confidentiality and non-disclosure terms
+- A data processing agreement covering personal data, consistent with applicable privacy laws such as the California Consumer Privacy Act
+- Notification to Intertrend of a security incident affecting Intertrend data within 72 hours of discovery
+- Disclosure of subcontractors that will access Intertrend data
+- Return or certified destruction of Intertrend data at the end of the relationship
+- Intertrend's right to request security evidence, such as updated audit reports
+
+## Access management
+
+Vendor access to Intertrend systems is limited to what the service requires, is provided through named accounts with multi-factor authentication, and is reviewed during each vendor review. Shared or generic vendor accounts are not permitted without IT Manager approval.
+
+## Ongoing monitoring
+
+| Tier | Review frequency | Review covers |
+| --- | --- | --- |
+| Critical | Annually | Updated audit report or questionnaire, access review, incidents, service performance |
+| High | Annually | Updated audit report or questionnaire, access review |
+| Moderate | Every two years | Confirmation that the service and data access have not changed |
+| Low | At renewal | Confirmation the vendor is still low risk |
+
+A vendor is reviewed out of cycle if it reports a security incident, changes ownership, or begins handling new types of data.
+
+## Vendor incidents
+
+A security incident reported by a vendor, or discovered by Intertrend, that affects Intertrend data is handled under the [Cybersecurity Incident Response Plan](/policies/incident-response).
+
+## Offboarding
+
+When a vendor relationship ends, the IT Manager removes the vendor's access to all Intertrend systems, confirms the return or destruction of Intertrend data, and updates the vendor inventory.
+
+## Exceptions
+
+Exceptions to this policy require written approval from executive leadership, a documented reason, and a date for re-evaluation.
+
+## Policy review
+
+The IT Manager reviews this policy annually and when significant changes occur in Intertrend's vendors or regulatory obligations.
